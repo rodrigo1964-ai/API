@@ -1,0 +1,15 @@
+{
+  "precision": 1,
+  "variables": [
+    {"nombre": "departamentos", "tipo": "set", "domain": ["ventas","compras","rrhh","it","legal"], "value": ["ventas", "it"]},
+    {"nombre": "empleados", "tipo": "integer", "domain": [10, 500], "value": [150, 200]},
+    {"nombre": "satisfaccion", "tipo": "float", "domain": [0.0, 10.0], "value": 8.5},
+    {"nombre": "remoto", "tipo": "logic", "domain": [true, false], "value": [true, false]}
+  ],
+  "expresiones": [
+    "empleados >= 100",
+    "satisfaccion >= 7.0",
+    "empleados * satisfaccion > 1000",
+    "departamentos SUBSET {ventas,compras,rrhh,it,legal,finanzas}"
+  ]
+}

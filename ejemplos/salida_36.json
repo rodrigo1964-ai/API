@@ -1,0 +1,34 @@
+{
+	"archivo_entrada":	"ejemplos/entrada_36.json",
+	"precision":	2,
+	"factor":	100,
+	"variables":	[{
+			"nombre":	"metodos_pago",
+			"tipo":	"set",
+			"dominio":	[0, 0],
+			"valor":	["tarjeta", "transferencia"]
+		}, {
+			"nombre":	"monto",
+			"tipo":	"float",
+			"dominio":	[0, 100000],
+			"valor":	[500, 1000, 1500]
+		}, {
+			"nombre":	"verificado",
+			"tipo":	"logic",
+			"dominio":	[true, false],
+			"valor":	true
+		}],
+	"expresiones":	[{
+			"expresion":	"monto >= 100.0",
+			"resultado":	[true, true, true]
+		}, {
+			"expresion":	"verificado = true",
+			"resultado":	true
+		}],
+	"resumen":	{
+		"total_variables":	3,
+		"total_expresiones":	4,
+		"errores":	0,
+		"valido":	true
+	}
+}

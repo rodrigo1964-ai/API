@@ -1,0 +1,26 @@
+{
+	"archivo_entrada":	"ejemplos/entrada_12.json",
+	"precision":	0,
+	"factor":	1,
+	"variables":	[{
+			"nombre":	"edad",
+			"tipo":	"integer",
+			"dominio":	[1, 100],
+			"valor":	25
+		}, {
+			"nombre":	"mayor_edad",
+			"tipo":	"logic",
+			"dominio":	[true, false],
+			"valor":	null
+		}],
+	"expresiones":	[{
+			"expresion":	"edad >= 18",
+			"resultado":	true
+		}],
+	"resumen":	{
+		"total_variables":	2,
+		"total_expresiones":	1,
+		"errores":	0,
+		"valido":	true
+	}
+}

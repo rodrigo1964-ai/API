@@ -1,0 +1,28 @@
+{
+  "precision": 2,
+  "variables": [
+    {"nombre": "x", "tipo": "integer", "domain": [1, 100], "value": [10, 20]},
+    {"nombre": "y", "tipo": "integer", "domain": [1, 50], "value": [5, 10, 15]},
+    {"nombre": "a", "tipo": "float", "domain": [0.0, 10.0], "value": [1.5, 3.0]},
+    {"nombre": "b", "tipo": "float", "domain": [0.0, 5.0], "value": [0.5, 1.0, 2.0]},
+    {"nombre": "c", "tipo": "integer", "domain": [-10, 10], "value": [-2, 0, 2]},
+    {"nombre": "d", "tipo": "float", "domain": [0.0, 100.0], "value": [10.0, 25.0]}
+  ],
+  "expresiones": [
+    "((x + y) * (a - b))",
+    "((x - y) / (a + b))",
+    "((a * b) + (x * y))",
+    "((x / 2) - (a * 3))",
+    "(((x + y) * a) / (b + 1))",
+    "((sqr(a) + sqr(b)) * (x - y))",
+    "((x * (y + c)) - (a * (b + d)))",
+    "(((a + b) * (x - c)) / (y + 1))",
+    "((abs(c) * a) + (sqrt(d) * b))",
+    "((x + (y * 2)) - ((a + b) * c))",
+    "(((x / y) + (a / b)) * c)",
+    "((sin(a) + cos(b)) * (x + y))",
+    "((exp(a) - ln(d)) * (y - c))",
+    "(((x + a) * (y - b)) / ((c + 5) * d))",
+    "((sqr(x - y) + abs(a - b)) * (c + d))"
+  ]
+}

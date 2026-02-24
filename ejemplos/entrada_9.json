@@ -1,0 +1,11 @@
+{
+  "precision": 0,
+  "variables": [
+    {"nombre": "p", "tipo": "logic", "domain": [true, false], "value": true},
+    {"nombre": "q", "tipo": "logic", "domain": [true, false], "value": false}
+  ],
+  "expresiones": [
+    "p IMPLICA q",
+    "NOT p OR q"
+  ]
+}

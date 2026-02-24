@@ -1,0 +1,14 @@
+{
+  "precision": 0,
+  "variables": [
+    {"nombre": "permisos", "tipo": "set", "domain": ["read","write","execute","delete"], "value": ["read", "write"]},
+    {"nombre": "nivel", "tipo": "integer", "domain": [1, 5], "value": 3},
+    {"nombre": "autenticado", "tipo": "logic", "domain": [true, false], "value": true}
+  ],
+  "expresiones": [
+    "autenticado = true",
+    "{read} SUBSET permisos",
+    "{write,delete} SUBSET permisos",
+    "CARDINALITY(permisos) >= 2"
+  ]
+}

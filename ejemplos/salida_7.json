@@ -1,0 +1,24 @@
+{
+	"archivo_entrada":	"ejemplos/entrada_7.json",
+	"precision":	1,
+	"factor":	10,
+	"variables":	[{
+			"nombre":	"x",
+			"tipo":	"integer",
+			"dominio":	[-10, 10],
+			"valor":	-5
+		}],
+	"expresiones":	[{
+			"expresion":	"abs(x)",
+			"resultado":	5
+		}, {
+			"expresion":	"x * x",
+			"resultado":	250
+		}],
+	"resumen":	{
+		"total_variables":	1,
+		"total_expresiones":	2,
+		"errores":	0,
+		"valido":	true
+	}
+}

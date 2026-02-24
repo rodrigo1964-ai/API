@@ -1,0 +1,15 @@
+{
+  "precision": 2,
+  "variables": [
+    {"nombre": "servicios", "tipo": "set", "domain": ["http","https","ssh","ftp","smtp"], "value": ["https", "ssh"]},
+    {"nombre": "puertos_activos", "tipo": "integer", "domain": [0, 100], "value": [10, 15, 20]},
+    {"nombre": "latencia", "tipo": "float", "domain": [0.0, 100.0], "value": [5.5, 10.2]},
+    {"nombre": "conectado", "tipo": "logic", "domain": [true, false], "value": true}
+  ],
+  "expresiones": [
+    "conectado = true",
+    "latencia < 20.0",
+    "puertos_activos <= 25",
+    "servicios INTERSECT {https,ssh} <> {}"
+  ]
+}

@@ -1,0 +1,45 @@
+{
+	"archivo_entrada":	"ejemplos/entrada_23.json",
+	"precision":	1,
+	"factor":	10,
+	"variables":	[{
+			"nombre":	"departamentos",
+			"tipo":	"set",
+			"dominio":	[0, 0],
+			"valor":	["ventas", "it"]
+		}, {
+			"nombre":	"empleados",
+			"tipo":	"integer",
+			"dominio":	[10, 500],
+			"valor":	[150, 200]
+		}, {
+			"nombre":	"satisfaccion",
+			"tipo":	"float",
+			"dominio":	[0, 10],
+			"valor":	8.5
+		}, {
+			"nombre":	"remoto",
+			"tipo":	"logic",
+			"dominio":	[true, false],
+			"valor":	[true, false]
+		}],
+	"expresiones":	[{
+			"expresion":	"empleados >= 100",
+			"resultado":	[true, true]
+		}, {
+			"expresion":	"satisfaccion >= 7.0",
+			"resultado":	true
+		}, {
+			"expresion":	"empleados * satisfaccion > 1000",
+			"resultado":	[true, true]
+		}, {
+			"expresion":	"departamentos SUBSET {ventas,compras,rrhh,it,legal,finanzas}",
+			"resultado":	["ventas", "it"]
+		}],
+	"resumen":	{
+		"total_variables":	4,
+		"total_expresiones":	4,
+		"errores":	0,
+		"valido":	true
+	}
+}

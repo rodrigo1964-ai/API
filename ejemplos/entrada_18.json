@@ -1,0 +1,11 @@
+{
+  "precision": 1,
+  "variables": [
+    {"nombre": "condicion1", "tipo": "logic", "domain": [true, false], "value": true},
+    {"nombre": "condicion2", "tipo": "logic", "domain": [true, false], "value": true},
+    {"nombre": "resultado", "tipo": "integer", "domain": [0, 100], "value": 42}
+  ],
+  "expresiones": [
+    "condicion1 AND condicion2"
+  ]
+}

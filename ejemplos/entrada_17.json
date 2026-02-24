@@ -1,0 +1,11 @@
+{
+  "precision": 0,
+  "variables": [
+    {"nombre": "n1", "tipo": "integer", "domain": [0, 100], "value": 5},
+    {"nombre": "n2", "tipo": "integer", "domain": [0, 100], "value": 10},
+    {"nombre": "n3", "tipo": "integer", "domain": [0, 100], "value": 15}
+  ],
+  "expresiones": [
+    "(n1 + n2 + n3) / 3"
+  ]
+}

@@ -1,0 +1,34 @@
+{
+	"archivo_entrada":	"ejemplos/entrada_32.json",
+	"precision":	2,
+	"factor":	100,
+	"variables":	[{
+			"nombre":	"sensores",
+			"tipo":	"set",
+			"dominio":	[0, 0],
+			"valor":	["temp", "hum", "luz"]
+		}, {
+			"nombre":	"temperatura",
+			"tipo":	"float",
+			"dominio":	[-20, 60],
+			"valor":	[22.5, 25]
+		}, {
+			"nombre":	"activo",
+			"tipo":	"logic",
+			"dominio":	[true, false],
+			"valor":	true
+		}],
+	"expresiones":	[{
+			"expresion":	"temperatura >= 15.0 AND temperatura <= 30.0",
+			"resultado":	[true, true, true, true]
+		}, {
+			"expresion":	"activo = true",
+			"resultado":	true
+		}],
+	"resumen":	{
+		"total_variables":	3,
+		"total_expresiones":	4,
+		"errores":	0,
+		"valido":	true
+	}
+}

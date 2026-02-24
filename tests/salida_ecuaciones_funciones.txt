@@ -1,0 +1,284 @@
+Bridge GeCode - Validador JSON
+====================================
+
+=== PRECISION: 2 decimales (factor=100) ===
+
+=== VARIABLES ===
+  [0] x : float dom=[0..1000] val=[incert. 3 vals]
+  [1] y : float dom=[0..1000] val=[incert. 2 vals]
+  [2] z : float dom=[0..2000] val=[incert. 2 vals]
+  [3] a : integer dom=[100..10000] val=[incert. 3 vals]
+  [4] b : integer dom=[100..5000] val=[incert. 2 vals]
+  [5] activo : logic dom={0,1} val=[incert. 2 vals]
+  [6] validado : logic dom={0,1} val=[incert. 2 vals]
+
+=== EXPRESIONES ===
+  Expr #1: ((sqrt(x) = sqrt(y - 1)) AND activo)
+    [AND]
+      [=]
+        [sqrt]
+          IDENT(x)
+        [sqrt]
+          [-]
+            IDENT(y)
+            ENTERO(1 = 0.010)
+      IDENT(activo)
+  Evaluando...
+  => [false, false, false, false, true, false, false, false, false, false, ...] (12 valores)
+
+  Expr #2: ((abs(x - y) > 1) OR (sin(x) < cos(y)))
+    [OR]
+      [>]
+        [abs]
+          [-]
+            IDENT(x)
+            IDENT(y)
+        ENTERO(1 = 0.010)
+      [<]
+        [sin]
+          IDENT(x)
+        [cos]
+          IDENT(y)
+  Evaluando...
+  => [true, true, true, true, true, true, true, true, true, true, ...] (36 valores)
+
+  Expr #3: ((sqr(x) + sqr(y) = sqr(z)) IMPLICA validado)
+    [IMPLICA]
+      [=]
+        [+]
+          [sqr]
+            IDENT(x)
+          [sqr]
+            IDENT(y)
+        [sqr]
+          IDENT(z)
+      IDENT(validado)
+  Evaluando...
+  => [true, true, true, true, true, true, true, true, true, true, ...] (24 valores)
+
+  Expr #4: ((exp(x) > exp(y)) AND (ln(z) < ln(x + y)))
+    [AND]
+      [>]
+        [exp]
+          IDENT(x)
+        [exp]
+          IDENT(y)
+      [<]
+        [ln]
+          IDENT(z)
+        [ln]
+          [+]
+            IDENT(x)
+            IDENT(y)
+  Evaluando...
+  => [false, false, false, false, false, false, false, false, false, false, ...] (72 valores)
+
+  Expr #5: ((sqrt(a) >= b) OR ((abs(a - b) < 10) AND activo))
+    [OR]
+      [>=]
+        [sqrt]
+          IDENT(a)
+        IDENT(b)
+      [AND]
+        [<]
+          [abs]
+            [-]
+              IDENT(a)
+              IDENT(b)
+          ENTERO(10 = 0.100)
+        IDENT(activo)
+  Evaluando...
+  => [false, false, false, false, false, false, false, false, false, false, ...] (72 valores)
+
+  Expr #6: ((sin(x) = cos(y - 1.57)) AND (activo OR validado))
+    [AND]
+      [=]
+        [sin]
+          IDENT(x)
+        [cos]
+          [-]
+            IDENT(y)
+            ENTERO(157 = 1.570)
+      [OR]
+        IDENT(activo)
+        IDENT(validado)
+  Evaluando...
+  => [false, false, false, false, false, false, false, false, true, true, ...] (24 valores)
+
+  Expr #7: ((sqr(sqrt(x)) = x) IMPLICA (validado AND (y > 0)))
+    [IMPLICA]
+      [=]
+        [sqr]
+          [sqrt]
+            IDENT(x)
+        IDENT(x)
+      [AND]
+        IDENT(validado)
+        [>]
+          IDENT(y)
+          ENTERO(0 = 0.000)
+  Evaluando...
+  => [true, true, false, false, true, true, true, true, true, true, ...] (36 valores)
+
+  Expr #8: ((abs(sin(x)) < 1) AND ((cos(y) >= 0) OR activo))
+    [AND]
+      [<]
+        [abs]
+          [sin]
+            IDENT(x)
+        ENTERO(1 = 0.010)
+      [OR]
+        [>=]
+          [cos]
+            IDENT(y)
+          ENTERO(0 = 0.000)
+        IDENT(activo)
+  Evaluando...
+  => [false, false, false, false, false, false, false, false, false, false, ...] (12 valores)
+
+  Expr #9: ((exp(ln(x)) = x) OR ((sqrt(sqr(y)) = y) AND validado))
+    [OR]
+      [=]
+        [exp]
+          [ln]
+            IDENT(x)
+        IDENT(x)
+      [AND]
+        [=]
+          [sqrt]
+            [sqr]
+              IDENT(y)
+          IDENT(y)
+        IDENT(validado)
+  Evaluando...
+  => [true, true, true, true, true, true, true, true, true, false, ...] (72 valores)
+
+  Expr #10: ((abs(x - y) = abs(y - x)) AND (activo IMPLICA validado))
+    [AND]
+      [=]
+        [abs]
+          [-]
+            IDENT(x)
+            IDENT(y)
+        [abs]
+          [-]
+            IDENT(y)
+            IDENT(x)
+      [IMPLICA]
+        IDENT(activo)
+        IDENT(validado)
+  Evaluando...
+  => [true, false, true, true, false, false, false, false, false, false, ...] (144 valores)
+
+  Expr #11: ((sin(x) * sin(x) + cos(x) * cos(x) = 1) OR (NOT activo))
+    [OR]
+      [=]
+        [+]
+          [*]
+            [sin]
+              IDENT(x)
+            [sin]
+              IDENT(x)
+          [*]
+            [cos]
+              IDENT(x)
+            [cos]
+              IDENT(x)
+        ENTERO(1 = 0.010)
+      [NOT]
+        IDENT(activo)
+  Evaluando...
+  => [false, true, false, true, false, true, false, true, false, true, ...] (162 valores)
+
+  Expr #12: ((sqrt(x * x + y * y) > z) AND ((a > b) OR validado))
+    [AND]
+      [>]
+        [sqrt]
+          [+]
+            [*]
+              IDENT(x)
+              IDENT(x)
+            [*]
+              IDENT(y)
+              IDENT(y)
+        IDENT(z)
+      [OR]
+        [>]
+          IDENT(a)
+          IDENT(b)
+        IDENT(validado)
+  Evaluando...
+  => [true, true, true, false, true, true, true, true, true, true, ...] (864 valores)
+
+  Expr #13: ((ln(exp(x)) = x) IMPLICA ((abs(a - b) > 5) AND activo))
+    [IMPLICA]
+      [=]
+        [ln]
+          [exp]
+            IDENT(x)
+        IDENT(x)
+      [AND]
+        [>]
+          [abs]
+            [-]
+              IDENT(a)
+              IDENT(b)
+          ENTERO(5 = 0.050)
+        IDENT(activo)
+  Evaluando...
+  => [true, true, true, true, true, true, true, true, true, true, ...] (108 valores)
+
+  Expr #14: ((sqr(x) - sqr(y) = (x + y) * (x - y)) OR (validado AND (z > 5)))
+    [OR]
+      [=]
+        [-]
+          [sqr]
+            IDENT(x)
+          [sqr]
+            IDENT(y)
+        [*]
+          [+]
+            IDENT(x)
+            IDENT(y)
+          [-]
+            IDENT(x)
+            IDENT(y)
+      [AND]
+        IDENT(validado)
+        [>]
+          IDENT(z)
+          ENTERO(5 = 0.050)
+  Evaluando...
+  => [true, true, false, false, true, true, false, false, true, true, ...] (864 valores)
+
+  Expr #15: ((sqrt(a) * sqrt(b) = sqrt(a * b)) AND ((activo OR validado) IMPLICA (x < y)))
+    [AND]
+      [=]
+        [*]
+          [sqrt]
+            IDENT(a)
+          [sqrt]
+            IDENT(b)
+        [sqrt]
+          [*]
+            IDENT(a)
+            IDENT(b)
+      [IMPLICA]
+        [OR]
+          IDENT(activo)
+          IDENT(validado)
+        [<]
+          IDENT(x)
+          IDENT(y)
+  Evaluando...
+  => [false, false, false, false, false, false, false, false, false, false, ...] (864 valores)
+
+========================================
+RESUMEN
+========================================
+  Variables: 7 (int:2 float:3 logic:2 set:0)
+  Expresiones: 15
+  Funciones:   0
+  Errores: 0
+
+  >>> JSON VALIDO - listo para el Bridge <<<

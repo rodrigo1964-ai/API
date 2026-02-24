@@ -1,0 +1,26 @@
+{
+  "precision": 1,
+  "variables": [
+    {"nombre": "enfermeros",     "tipo": "integer", "domain": [2, 15],       "value": null},
+    {"nombre": "medicos",        "tipo": "integer", "domain": [1, 8],        "value": [3, 4, 5]},
+    {"nombre": "horas_turno",    "tipo": "float",   "domain": [4.0, 12.0],   "value": 8.5},
+    {"nombre": "costo_hora",     "tipo": "float",   "domain": [50.0, 200.0], "value": [75.0, 80.0, 85.0]},
+    {"nombre": "urgente",        "tipo": "logic",   "domain": [true, false], "value": true},
+    {"nombre": "nocturno",       "tipo": "logic",   "domain": [true, false], "value": [true, false]},
+    {"nombre": "especialidad",   "tipo": "set",     "domain": {"nombre":"Especialidades","miembros":["trauma","cardio","neuro","pediatria","general"]}, "value": "trauma"},
+    {"nombre": "equipamiento",   "tipo": "set",     "domain": {"nombre":"Equipos","miembros":["respirador","monitor","desfibrilador","ecografo","bomba_infusion"]}, "value": ["respirador", "monitor"]},
+    {"nombre": "sala",           "tipo": "integer", "domain": [1, 20],       "value": 7},
+    {"nombre": "pacientes",      "tipo": "integer", "domain": [0, 50],       "value": null}
+  ],
+  "expresiones": [
+    "enfermeros + medicos <= 20",
+    "enfermeros >= medicos * 2",
+    "horas_turno * costo_hora <= 1500.0",
+    "urgente = 1 IMPLICA medicos >= 3",
+    "nocturno = 1 IMPLICA enfermeros >= 5",
+    "pacientes <= enfermeros * 4",
+    "NOT nocturno OR horas_turno >= 8.0",
+    "abs(enfermeros - pacientes) <= 10",
+    "sala <> 13"
+  ]
+}

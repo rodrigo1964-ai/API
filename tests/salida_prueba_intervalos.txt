@@ -1,0 +1,146 @@
+Bridge GeCode - Validador JSON
+====================================
+
+=== PRECISION: 2 decimales (factor=100) ===
+
+=== VARIABLES ===
+  [0] x : float dom=[0..1000] val=[incert. 2 vals]
+  [1] y : float dom=[-500..500] val=[incert. 2 vals]
+  [2] z : integer dom=[100..10000] val=[incert. 2 vals]
+  [3] w : float dom=[0..10000] val=[incert. 2 vals]
+
+=== EXPRESIONES ===
+  Expr #1: x
+    IDENT(x)
+  Evaluando...
+  => [1.000, 3.000] (2 valores)
+
+  Expr #2: x + y
+    [+]
+      IDENT(x)
+      IDENT(y)
+  Evaluando...
+  => [1.500, 3.500, 3.500, 5.500] (4 valores)
+
+  Expr #3: x - y
+    [-]
+      IDENT(x)
+      IDENT(y)
+  Evaluando...
+  => [0.500, -1.500, 2.500, 0.500] (4 valores)
+
+  Expr #4: x * y
+    [*]
+      IDENT(x)
+      IDENT(y)
+  Evaluando...
+  => [50.000, 250.000, 150.000, 750.000] (4 valores)
+
+  Expr #5: x * x
+    [*]
+      IDENT(x)
+      IDENT(x)
+  Evaluando...
+  => [100.000, 300.000, 300.000, 900.000] (4 valores)
+
+  Expr #6: 2 * x + 3
+    [+]
+      [*]
+        ENTERO(2 = 0.020)
+        IDENT(x)
+      ENTERO(3 = 0.030)
+  Evaluando...
+  => [2.030, 6.030] (2 valores)
+
+  Expr #7: (x + y) * z
+    [*]
+      [+]
+        IDENT(x)
+        IDENT(y)
+      IDENT(z)
+  Evaluando...
+  => [1500.000, 3000.000, 3500.000, 7000.000, 3500.000, 7000.000, 5500.000, 11000.000] (8 valores)
+
+  Expr #8: x * y + z * w
+    [+]
+      [*]
+        IDENT(x)
+        IDENT(y)
+      [*]
+        IDENT(z)
+        IDENT(w)
+  Evaluando...
+  => [5050.000, 15050.000, 10050.000, 30050.000, 5250.000, 15250.000, 10250.000, 30250.000, 5150.000, 15150.000, ...] (16 valores)
+
+  Expr #9: sqrt(x)
+    [sqrt]
+      IDENT(x)
+  Evaluando...
+  => [1.000, 1.730] (2 valores)
+
+  Expr #10: abs(x - y)
+    [abs]
+      [-]
+        IDENT(x)
+        IDENT(y)
+  Evaluando...
+  => [0.500, 1.500, 2.500, 0.500] (4 valores)
+
+  Expr #11: sqr(x) - sqr(y)
+    [-]
+      [sqr]
+        IDENT(x)
+      [sqr]
+        IDENT(y)
+  Evaluando...
+  => [0.750, -5.250, 8.750, 2.750] (4 valores)
+
+  Expr #12: x / 2 + y / 2
+    [+]
+      [/]
+        IDENT(x)
+        ENTERO(2 = 0.020)
+      [/]
+        IDENT(y)
+        ENTERO(2 = 0.020)
+  Evaluando...
+  => [0.750, 1.750, 1.750, 2.750] (4 valores)
+
+  Expr #13: (x + y) / (w - x)
+    [/]
+      [+]
+        IDENT(x)
+        IDENT(y)
+      [-]
+        IDENT(w)
+        IDENT(x)
+  Evaluando...
+  => [0.000, 0.000, 0.000, 0.000, 0.000, 0.010, 0.000, 0.000, 0.000, 0.010, ...] (16 valores)
+
+  Expr #14: sin(x) + cos(y)
+    [+]
+      [sin]
+        IDENT(x)
+      [cos]
+        IDENT(y)
+  Evaluando...
+  => [1.710, 0.040, 1.010, -0.660] (4 valores)
+
+  Expr #15: exp(x) - ln(w)
+    [-]
+      [exp]
+        IDENT(x)
+      [ln]
+        IDENT(w)
+  Evaluando...
+  => [1.110, 0.010, 18.480, 17.380] (4 valores)
+
+========================================
+RESUMEN
+========================================
+  Variables: 4 (int:1 float:3 logic:0 set:0)
+  Expresiones: 15
+  Funciones:   0
+  Errores: 0
+
+  >>> JSON VALIDO - listo para el Bridge <<<

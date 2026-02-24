@@ -1,0 +1,14 @@
+{
+  "precision": 2,
+  "variables": [
+    {"nombre": "metodos_pago", "tipo": "set", "domain": ["efectivo","tarjeta","transferencia","crypto"], "value": ["tarjeta", "transferencia"]},
+    {"nombre": "monto", "tipo": "float", "domain": [0.0, 100000.0], "value": [500.0, 1000.0, 1500.0]},
+    {"nombre": "verificado", "tipo": "logic", "domain": [true, false], "value": true}
+  ],
+  "expresiones": [
+    "monto >= 100.0",
+    "verificado = true",
+    "{tarjeta} SUBSET metodos_pago",
+    "CARDINALITY(metodos_pago) <= 3"
+  ]
+}

@@ -1,0 +1,32 @@
+{
+	"archivo_entrada":	"ejemplos/entrada_4.json",
+	"precision":	1,
+	"factor":	10,
+	"variables":	[{
+			"nombre":	"temperatura",
+			"tipo":	"float",
+			"dominio":	[0, 50],
+			"valor":	22.5
+		}, {
+			"nombre":	"umbral",
+			"tipo":	"float",
+			"dominio":	[0, 50],
+			"valor":	20
+		}],
+	"expresiones":	[{
+			"expresion":	"temperatura > umbral",
+			"resultado":	true
+		}, {
+			"expresion":	"temperatura >= 20.0",
+			"resultado":	true
+		}, {
+			"expresion":	"temperatura <= 25.0",
+			"resultado":	true
+		}],
+	"resumen":	{
+		"total_variables":	2,
+		"total_expresiones":	3,
+		"errores":	0,
+		"valido":	true
+	}
+}

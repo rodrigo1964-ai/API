@@ -1,0 +1,21 @@
+{
+	"archivo_entrada":	"test_intervalo.json",
+	"precision":	1,
+	"factor":	10,
+	"variables":	[{
+			"nombre":	"x",
+			"tipo":	"float",
+			"dominio":	[1, 2],
+			"valor":	[1.1, 1.2]
+		}],
+	"expresiones":	[{
+			"expresion":	"2 * x + 5",
+			"resultado":	[2.7, 2.9]
+		}],
+	"resumen":	{
+		"total_variables":	1,
+		"total_expresiones":	1,
+		"errores":	0,
+		"valido":	true
+	}
+}

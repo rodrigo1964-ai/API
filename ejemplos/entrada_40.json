@@ -1,0 +1,14 @@
+{
+  "precision": 2,
+  "variables": [
+    {"nombre": "estados", "tipo": "set", "domain": ["pendiente","proceso","revision","completado","cancelado"], "value": ["proceso", "revision"]},
+    {"nombre": "prioridad", "tipo": "integer", "domain": [1, 5], "value": [3, 4]},
+    {"nombre": "urgente", "tipo": "logic", "domain": [true, false], "value": [true, false]}
+  ],
+  "expresiones": [
+    "prioridad >= 3",
+    "{proceso} SUBSET estados",
+    "estados DIFFERENCE {cancelado}",
+    "CARDINALITY(estados) <= 3"
+  ]
+}

@@ -1,0 +1,93 @@
+Bridge GeCode - Validador JSON
+====================================
+
+=== PRECISION: 0 decimales (factor=1) ===
+
+=== VARIABLES ===
+  [0] activo : logic dom={0,1} val=[incert. 2 vals]
+  [1] validado : logic dom={0,1} val=[incert. 2 vals]
+  [2] autorizado : logic dom={0,1} val=[incert. 2 vals]
+  [3] A : set dom={} val=[incert. 2 vals]
+  [4] B : set dom={} val=[incert. 2 vals]
+  [5] permisos : set dom={} val=[incert. 2 vals]
+  [6] nivel : integer dom=[1..10] val=[incert. 3 vals]
+
+=== EXPRESIONES ===
+  Expr #1: ((activo AND validado) OR (autorizado AND (CARDINALITY(A) > 1)))
+    [OR]
+      [AND]
+        IDENT(activo)
+        IDENT(validado)
+      [AND]
+        IDENT(autorizado)
+  Evaluando...
+  => [true, true, false, false, false, false, false, false] (8 valores)
+
+  Expr #2: ((CARDINALITY(A UNION B) >= 3) AND (activo OR validado))
+
+  Expr #3: (({b} SUBSET A) AND ({c} SUBSET B)) OR (NOT activo)
+
+  Expr #4: ((activo IMPLICA validado) AND (CARDINALITY(permisos) >= 2))
+    [AND]
+      [IMPLICA]
+        IDENT(activo)
+        IDENT(validado)
+  Evaluando...
+  => [false, false, false, false] (4 valores)
+
+  Expr #5: (((CARDINALITY(A) + CARDINALITY(B)) > 2) AND (activo AND autorizado))
+
+  Expr #6: ((activo OR validado) AND ((nivel > 3) OR ({write} SUBSET permisos)))
+    [AND]
+      [OR]
+        IDENT(activo)
+        IDENT(validado)
+      [OR]
+        [>]
+          IDENT(nivel)
+          ENTERO(3)
+  Evaluando...
+  => [false, true, true, false, true, true, false, true, true, false, ...] (12 valores)
+
+  Expr #7: (((A INTERSECT B) = {b}) IMPLICA (activo AND validado))
+    IDENT(A)
+  Evaluando...
+  => {a, b}
+
+  Expr #8: ((CARDINALITY(A UNION B) <= 5) AND ((activo AND validado) OR autorizado))
+
+  Expr #9: (({a} SUBSET A) AND ({read} SUBSET permisos)) AND (validado OR (nivel >= 5))
+
+  Expr #10: ((NOT activo) OR ((CARDINALITY(permisos) >= 2) AND autorizado))
+    [OR]
+      [NOT]
+        IDENT(activo)
+  Evaluando...
+  => [false, true] (2 valores)
+
+  Expr #11: (((CARDINALITY(A) * nivel) > 10) AND (activo OR validado))
+
+  Expr #12: ((activo AND (CARDINALITY(B) >= 2)) OR ((nivel > 5) AND autorizado))
+    [AND]
+      IDENT(activo)
+  Evaluando...
+  => [false, false] (2 valores)
+
+  Expr #13: (({b,c} SUBSET (A UNION B)) AND ((activo AND validado) IMPLICA autorizado))
+
+  Expr #14: ((CARDINALITY(permisos) + nivel) >= 5) AND ((activo OR validado) AND (NOT autorizado))
+
+  Expr #15: (((A DIFFERENCE B) = {a}) AND (activo IMPLICA (validado AND (nivel >= 2))))
+    IDENT(A)
+  Evaluando...
+  => {a, b}
+
+========================================
+RESUMEN
+========================================
+  Variables: 7 (int:1 float:0 logic:3 set:3)
+  Expresiones: 15
+  Funciones:   0
+  Errores: 0
+
+  >>> JSON VALIDO - listo para el Bridge <<<

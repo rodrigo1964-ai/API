@@ -1,0 +1,32 @@
+{
+	"archivo_entrada":	"ejemplos/entrada_13.json",
+	"precision":	0,
+	"factor":	1,
+	"variables":	[{
+			"nombre":	"x",
+			"tipo":	"integer",
+			"dominio":	[1, 10],
+			"valor":	[3, 7]
+		}, {
+			"nombre":	"y",
+			"tipo":	"integer",
+			"dominio":	[1, 10],
+			"valor":	5
+		}],
+	"expresiones":	[{
+			"expresion":	"x < y",
+			"resultado":	[true, false]
+		}, {
+			"expresion":	"x > y",
+			"resultado":	[false, true]
+		}, {
+			"expresion":	"x = y",
+			"resultado":	[false, false]
+		}],
+	"resumen":	{
+		"total_variables":	2,
+		"total_expresiones":	3,
+		"errores":	0,
+		"valido":	true
+	}
+}

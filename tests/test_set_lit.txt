@@ -1,0 +1,13 @@
+(* Test de set literal *)
+
+precision: 0;
+
+variables: {
+}
+
+expresiones: {
+    CARDINALITY({a,b,c});
+}
+
+funciones: {
+}

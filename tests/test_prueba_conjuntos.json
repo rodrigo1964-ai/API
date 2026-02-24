@@ -1,0 +1,28 @@
+{
+  "precision": 0,
+  "variables": [
+    {"nombre": "A", "tipo": "set", "domain": ["a","b","c","d","e"], "value": ["a","b"]},
+    {"nombre": "B", "tipo": "set", "domain": ["b","c","d","e","f"], "value": ["b","c","d"]},
+    {"nombre": "C", "tipo": "set", "domain": ["x","y","z"], "value": ["x","y"]},
+    {"nombre": "roles", "tipo": "set", "domain": ["admin","user","guest","dev"], "value": ["admin","user"]},
+    {"nombre": "permisos", "tipo": "set", "domain": ["read","write","execute","delete"], "value": ["read","write","execute"]},
+    {"nombre": "usuarios", "tipo": "set", "domain": ["alice","bob","charlie","diana"], "value": ["alice","bob"]}
+  ],
+  "expresiones": [
+    "CARDINALITY(A)",
+    "CARDINALITY(B)",
+    "CARDINALITY(permisos)",
+    "A UNION B",
+    "A INTERSECT B",
+    "A DIFFERENCE B",
+    "{a} SUBSET A",
+    "{b,c} SUBSET B",
+    "{read,write} SUBSET permisos",
+    "CARDINALITY(A UNION B)",
+    "CARDINALITY(A INTERSECT B)",
+    "CARDINALITY(roles UNION usuarios)",
+    "(A UNION B) INTERSECT {a,b,c}",
+    "permisos DIFFERENCE {execute,delete}",
+    "CARDINALITY(C) + CARDINALITY(roles) - CARDINALITY(usuarios)"
+  ]
+}

@@ -1,0 +1,34 @@
+{
+	"archivo_entrada":	"ejemplos/entrada_40.json",
+	"precision":	2,
+	"factor":	100,
+	"variables":	[{
+			"nombre":	"estados",
+			"tipo":	"set",
+			"dominio":	[0, 0],
+			"valor":	["proceso", "revision"]
+		}, {
+			"nombre":	"prioridad",
+			"tipo":	"integer",
+			"dominio":	[1, 5],
+			"valor":	[3, 4]
+		}, {
+			"nombre":	"urgente",
+			"tipo":	"logic",
+			"dominio":	[true, false],
+			"valor":	[true, false]
+		}],
+	"expresiones":	[{
+			"expresion":	"prioridad >= 3",
+			"resultado":	[true, true]
+		}, {
+			"expresion":	"estados DIFFERENCE {cancelado}",
+			"resultado":	["proceso", "revision"]
+		}],
+	"resumen":	{
+		"total_variables":	3,
+		"total_expresiones":	4,
+		"errores":	0,
+		"valido":	true
+	}
+}

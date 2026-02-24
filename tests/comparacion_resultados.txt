@@ -1,0 +1,192 @@
+═══════════════════════════════════════════════════════════════════════════════
+   COMPARACIÓN: INTERVALO (endpoints) vs MALLA DISCRETA
+═══════════════════════════════════════════════════════════════════════════════
+
+Dominio: x ∈ [1.0, 2.0]
+Precision: 2 decimales (factor = 100)
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ CONFIGURACIÓN                                                               │
+├─────────────────────────────────────┬───────────────────────────────────────┤
+│ SOLO INTERVALO (endpoints)          │ MALLA DISCRETA (11 puntos)            │
+├─────────────────────────────────────┼───────────────────────────────────────┤
+│ x = {1.0, 2.0}                      │ x = {1.0, 1.1, 1.2, 1.3, 1.4,        │
+│                                     │      1.5, 1.6, 1.7, 1.8, 1.9, 2.0}   │
+│ 2 puntos (extremos)                 │ 11 puntos (paso 0.1)                 │
+└─────────────────────────────────────┴───────────────────────────────────────┘
+
+───────────────────────────────────────────────────────────────────────────────
+EXPRESIÓN #1: x
+───────────────────────────────────────────────────────────────────────────────
+INTERVALO:  [1.000, 2.000]                    (2 valores)
+MALLA:      [1.0, 1.1, 1.2, ..., 2.0]        (11 valores)
+
+✓ MALLA: Captura todos los puntos discretos del dominio
+
+───────────────────────────────────────────────────────────────────────────────
+EXPRESIÓN #2: x * x
+───────────────────────────────────────────────────────────────────────────────
+INTERVALO:  [100.0, 200.0, 200.0, 400.0]     (4 valores)
+            Solo: 1.0² y 2.0² = {1.0, 4.0}
+
+MALLA:      121 valores distintos
+            Incluye: 1.00, 1.21, 1.44, 1.69, 1.96, 2.25, 2.56, 2.89, 3.24,
+                     3.61, 4.00 y todos los productos intermedios
+
+✗ INTERVALO: Pierde 117 valores intermedios (97% de la información)
+
+───────────────────────────────────────────────────────────────────────────────
+EXPRESIÓN #3: x * x - x  (parábola)
+───────────────────────────────────────────────────────────────────────────────
+INTERVALO:  8 valores dispersos
+            {99.0, 98.0, 199.0, 198.0, 399.0, 398.0}
+
+MALLA:      1331 valores
+            Captura toda la curvatura: [98.1, 98.2, ..., 399.0]
+
+✗ INTERVALO: Pierde la estructura completa del conjunto solución
+
+───────────────────────────────────────────────────────────────────────────────
+EXPRESIÓN #4: 2 * x + 3  (transformación lineal)
+───────────────────────────────────────────────────────────────────────────────
+INTERVALO:  [2.030, 4.030]                    (2 valores)
+            Solo los extremos
+
+MALLA:      [2.03, 2.23, 2.43, 2.63, 2.83,   (11 valores)
+             3.03, 3.23, 3.43, 3.63, 3.83, 4.03]
+
+✓ MALLA: Discretización completa de la transformación lineal
+
+───────────────────────────────────────────────────────────────────────────────
+EXPRESIÓN #5: (x - 1.5) * (x - 1.5)  ★ CASO CRÍTICO ★
+───────────────────────────────────────────────────────────────────────────────
+
+Esta función tiene un MÍNIMO en x = 1.5
+
+INTERVALO:  [25.0, -25.0, -25.0, 25.0]       (4 valores)
+
+            Evaluaciones:
+            x = 1.0 → (1.0 - 1.5)² = 0.25
+            x = 2.0 → (2.0 - 1.5)² = 0.25
+
+            ✗ NO captura el mínimo f(1.5) = 0.0
+            ✗ Pierde completamente el punto crítico
+
+MALLA:      121 valores, incluyendo:
+
+            x = 1.0 → 25.0
+            x = 1.1 → 20.0
+            x = 1.2 → 15.0
+            x = 1.3 → 10.0
+            x = 1.4 → 5.0
+            x = 1.5 → ★ 0.0 ★  ← MÍNIMO CAPTURADO
+            x = 1.6 → -5.0
+            x = 1.7 → -10.0
+            x = 1.8 → -15.0
+            x = 1.9 → -20.0
+            x = 2.0 → 25.0
+
+            ✓ Captura el mínimo real
+            ✓ Muestra la forma parabólica completa
+
+═══════════════════════════════════════════════════════════════════════════════
+   PROBLEMAS FUNDAMENTALES DE LA ARITMÉTICA DE INTERVALOS
+═══════════════════════════════════════════════════════════════════════════════
+
+1. DEPENDENCY PROBLEM
+   ────────────────────
+   (x - 1.5) * (x - 1.5)  con x ∈ [1, 2]
+
+   Aritmética de intervalos:
+   [1, 2] - 1.5 = [-0.5, 0.5]
+   [-0.5, 0.5] * [-0.5, 0.5] = [-0.25, 0.25]  ← INCORRECTO
+
+   Resultado correcto: [0, 0.25]
+
+   La variable x aparece dos veces, pero el intervalo las trata como
+   independientes, generando SOBREESTIMACIÓN.
+
+2. WRAPPING/HULL PROBLEM
+   ──────────────────────
+   Conjunto solución real (cerca del mínimo):
+   S = {(1.5, 0.0), (1.4, 0.01), (1.6, 0.01), (1.3, 0.04), (1.7, 0.04), ...}
+
+   Este conjunto es NO CONVEXO en el espacio (x, f(x)).
+
+   El HULL (caja envolvente) incluye puntos que NO pertenecen a S.
+   → FALSOS POSITIVOS
+
+3. NO CIERRE BAJO OPERACIONES
+   ────────────────────────────
+   Las operaciones de intervalos no son cerradas bajo inversos:
+
+   x² ∈ [1, 4]  →  x ∈ [-2, 2] (teórico)
+   pero si sabíamos x ∈ [1, 2], perdimos esa información.
+
+═══════════════════════════════════════════════════════════════════════════════
+   VENTAJAS DE LA MALLA DISCRETA
+═══════════════════════════════════════════════════════════════════════════════
+
+✓ EXACTITUD           Evaluación exacta en cada punto, sin aproximaciones
+✓ NO CONVEXIDAD       Representa conjuntos no convexos exactamente
+✓ SIN WRAPPING        No hay sobreestimación por efecto hull
+✓ SIN DEPENDENCY      Cada evaluación usa valores concretos
+✓ PUNTOS CRÍTICOS     Captura mínimos, máximos (si están en la malla)
+✓ OPERACIONES CERRADAS Las operaciones están cerradas en el conjunto discreto
+✓ COMPOSABILIDAD      Fácil de componer y propagar restricciones
+
+═══════════════════════════════════════════════════════════════════════════════
+   FILOSOFÍA: REALES EN CONJUNTOS DISCRETOS
+═══════════════════════════════════════════════════════════════════════════════
+
+CONTINUO (Teórico)                    DISCRETO (Implementado)
+──────────────────                    ───────────────────────
+x ∈ ℝ (infinitos puntos)             x ∈ {x₁, x₂, ..., xₙ} (n puntos)
+Aritmética de intervalos              Evaluación exacta en cada punto
+Hull/wrapping/sobreestimación         Sin aproximación, sin falsos positivos
+Dependency problems                   Sin dependencias (valores concretos)
+Conjuntos convexos (aproximación)     Conjuntos no convexos (exactos)
+
+TRADE-OFF:
+  Tiempo: O(n^k) para k variables    vs    O(2^k) intervalos
+  Resultado: EXACTO en discretización    vs    APROXIMADO con hull
+
+═══════════════════════════════════════════════════════════════════════════════
+   APLICACIÓN: CONSTRAINT PROGRAMMING
+═══════════════════════════════════════════════════════════════════════════════
+
+Esta filosofía es FUNDAMENTAL para CP (Constraint Programming):
+
+→ Dominios son CONJUNTOS DISCRETOS de valores posibles
+→ Propagación elimina valores que violan restricciones (PRUNING)
+→ Búsqueda explora combinaciones válidas (BACKTRACKING)
+→ Soluciones son EXACTAS, no aproximadas
+→ No hay falsos positivos del hull
+
+Ejemplo con Gecode:
+  IntVar x(1, 20);        // x ∈ {1, 2, 3, ..., 20} (discreto!)
+  rel(x*x - x == 12);     // Evaluación exacta en cada valor
+  // Soluciones: x ∈ {4} (exacto, sin wrapping)
+
+═══════════════════════════════════════════════════════════════════════════════
+CONCLUSIÓN
+═══════════════════════════════════════════════════════════════════════════════
+
+Los REALES se representan como CONJUNTOS DISCRETOS FINITOS (malla) para:
+
+  1. Evitar wrapping/hull de intervalos
+  2. Evitar dependency problem
+  3. Representar conjuntos NO CONVEXOS exactamente
+  4. Capturar puntos críticos (mínimos, máximos)
+  5. Garantizar operaciones CERRADAS
+  6. Alinear con la filosofía de Constraint Programming
+
+Sacrificamos EFICIENCIA en tiempo (O(n) vs O(1)) por EXACTITUD y COMPLETITUD
+en la discretización elegida.
+
+La precisión se controla con:
+  - Paso de la malla (0.1, 0.01, etc.)
+  - Factor de escala (10, 100, 1000, etc.)
+  - Aritmética exacta de enteros internamente
+
+═══════════════════════════════════════════════════════════════════════════════

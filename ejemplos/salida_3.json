@@ -1,0 +1,32 @@
+{
+	"archivo_entrada":	"ejemplos/entrada_3.json",
+	"precision":	1,
+	"factor":	10,
+	"variables":	[{
+			"nombre":	"activo",
+			"tipo":	"logic",
+			"dominio":	[true, false],
+			"valor":	true
+		}, {
+			"nombre":	"bloqueado",
+			"tipo":	"logic",
+			"dominio":	[true, false],
+			"valor":	false
+		}],
+	"expresiones":	[{
+			"expresion":	"activo AND bloqueado",
+			"resultado":	false
+		}, {
+			"expresion":	"activo OR bloqueado",
+			"resultado":	true
+		}, {
+			"expresion":	"NOT activo",
+			"resultado":	false
+		}],
+	"resumen":	{
+		"total_variables":	2,
+		"total_expresiones":	3,
+		"errores":	0,
+		"valido":	true
+	}
+}

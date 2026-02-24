@@ -1,0 +1,29 @@
+{
+	"archivo_entrada":	"ejemplos/entrada_19.json",
+	"precision":	0,
+	"factor":	1,
+	"variables":	[{
+			"nombre":	"precio",
+			"tipo":	"integer",
+			"dominio":	[1, 1000],
+			"valor":	[100, 200, 300]
+		}, {
+			"nombre":	"descuento",
+			"tipo":	"integer",
+			"dominio":	[0, 100],
+			"valor":	20
+		}],
+	"expresiones":	[{
+			"expresion":	"precio - descuento",
+			"resultado":	[80, 180, 280]
+		}, {
+			"expresion":	"precio > 150",
+			"resultado":	[false, true, true]
+		}],
+	"resumen":	{
+		"total_variables":	2,
+		"total_expresiones":	2,
+		"errores":	0,
+		"valido":	true
+	}
+}

@@ -1,0 +1,30 @@
+(* Ejemplo completo: asignacion de recursos *)
+(* Todos los tipos: integer, float, logic, set *)
+(* Con valores fijos y con incertidumbre *)
+
+precision: 1;
+
+variables: {
+    horas       : integer : [1, 40]        : 20;
+    costo       : integer : [100, 5000]    : [150, 160];
+    aprobado    : logic   : [true, false]  : true;
+    verificado  : logic   : [true, false]  : [true, false];
+    temperatura : float   : [15, 45]       : 40.0;
+    equipo      : set     : {"Roles": ["dev","qa","pm","dba"]} : "dev";
+    estatus     : set     : {"Perfiles": ["apagado","discontinuado","eliminado","suspendido"]} : ["suspendido", "eliminado"];
+    prioridad   : integer : [1, 5]         : 3;
+}
+
+expresiones: {
+    horas * costo <= 5000;
+    temperatura >= 20.0;
+    aprobado = 1 IMPLICA horas >= 10;
+    abs(horas - prioridad) > 2;
+    NOT verificado OR aprobado = 1;
+}
+
+funciones: {
+    distinct : [horas, prioridad] : nil;
+    minimize : [costo] : nil;
+    branch   : [horas, costo, prioridad] : nil;
+}

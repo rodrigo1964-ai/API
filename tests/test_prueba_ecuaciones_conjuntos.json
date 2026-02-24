@@ -1,0 +1,29 @@
+{
+  "precision": 2,
+  "variables": [
+    {"nombre": "x", "tipo": "float", "domain": [0.0, 10.0], "value": [1.0, 4.0, 9.0]},
+    {"nombre": "y", "tipo": "float", "domain": [0.0, 10.0], "value": [2.0, 3.0]},
+    {"nombre": "z", "tipo": "float", "domain": [0.0, 20.0], "value": [5.0, 10.0]},
+    {"nombre": "A", "tipo": "set", "domain": ["a","b","c","d"], "value": ["a","b"]},
+    {"nombre": "B", "tipo": "set", "domain": ["b","c","d","e"], "value": ["b","c","d"]},
+    {"nombre": "permisos", "tipo": "set", "domain": ["read","write","execute"], "value": ["read","write"]},
+    {"nombre": "nivel", "tipo": "integer", "domain": [1, 10], "value": [2, 4, 6]}
+  ],
+  "expresiones": [
+    "((sqrt(x) = CARDINALITY(A)) AND ({a} SUBSET A))",
+    "((abs(x - y) > CARDINALITY(B)) OR (CARDINALITY(A UNION B) >= 4))",
+    "((sqr(CARDINALITY(A)) = x) AND ({b} SUBSET (A INTERSECT B)))",
+    "((CARDINALITY(permisos) + nivel = 8) OR (exp(x) > 10))",
+    "((sqrt(nivel) < y) AND (CARDINALITY(A UNION B) = 5))",
+    "((abs(CARDINALITY(A) - CARDINALITY(B)) = 1) OR (sin(x) < 1))",
+    "((sqr(nivel) = CARDINALITY(B) * 3) AND ({write} SUBSET permisos))",
+    "((CARDINALITY(A DIFFERENCE B) > 0) OR (sqrt(x) + sqrt(y) = sqrt(z)))",
+    "((ln(CARDINALITY(permisos) + 1) < y) AND (CARDINALITY(B) >= 3))",
+    "((CARDINALITY(A) * CARDINALITY(B) = nivel) OR (abs(x - y) > 2))",
+    "((sqrt(CARDINALITY(A UNION B)) = sqrt(5)) AND (nivel > 3))",
+    "((sin(nivel) + cos(nivel) < 2) OR (CARDINALITY(permisos) = 2))",
+    "((CARDINALITY(A) + CARDINALITY(B) = 5) AND (sqr(y) > x))",
+    "((abs(sqrt(x) - CARDINALITY(A)) < 1) OR ({c,d} SUBSET B))",
+    "((CARDINALITY(A INTERSECT B) * nivel = 2) AND (exp(nivel) > z))"
+  ]
+}

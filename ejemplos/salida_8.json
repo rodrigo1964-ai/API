@@ -1,0 +1,21 @@
+{
+	"archivo_entrada":	"ejemplos/entrada_8.json",
+	"precision":	2,
+	"factor":	100,
+	"variables":	[{
+			"nombre":	"radio",
+			"tipo":	"float",
+			"dominio":	[0, 100],
+			"valor":	5
+		}],
+	"expresiones":	[{
+			"expresion":	"radio * radio",
+			"resultado":	2500
+		}],
+	"resumen":	{
+		"total_variables":	1,
+		"total_expresiones":	1,
+		"errores":	0,
+		"valido":	true
+	}
+}

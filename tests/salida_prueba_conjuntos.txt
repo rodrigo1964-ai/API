@@ -1,0 +1,68 @@
+Bridge GeCode - Validador JSON
+====================================
+
+=== PRECISION: 0 decimales (factor=1) ===
+
+=== VARIABLES ===
+  [0] A : set dom={} val=[incert. 2 vals]
+  [1] B : set dom={} val=[incert. 3 vals]
+  [2] C : set dom={} val=[incert. 2 vals]
+  [3] roles : set dom={} val=[incert. 2 vals]
+  [4] permisos : set dom={} val=[incert. 3 vals]
+  [5] usuarios : set dom={} val=[incert. 2 vals]
+
+=== EXPRESIONES ===
+  Expr #1: CARDINALITY(A)
+
+  Expr #2: CARDINALITY(B)
+
+  Expr #3: CARDINALITY(permisos)
+
+  Expr #4: A UNION B
+    IDENT(A)
+  Evaluando...
+  => {a, b}
+
+  Expr #5: A INTERSECT B
+    IDENT(A)
+  Evaluando...
+  => {a, b}
+
+  Expr #6: A DIFFERENCE B
+    IDENT(A)
+  Evaluando...
+  => {a, b}
+
+  Expr #7: {a} SUBSET A
+
+  Expr #8: {b,c} SUBSET B
+
+  Expr #9: {read,write} SUBSET permisos
+
+  Expr #10: CARDINALITY(A UNION B)
+
+  Expr #11: CARDINALITY(A INTERSECT B)
+
+  Expr #12: CARDINALITY(roles UNION usuarios)
+
+  Expr #13: (A UNION B) INTERSECT {a,b,c}
+    IDENT(A)
+  Evaluando...
+  => {a, b}
+
+  Expr #14: permisos DIFFERENCE {execute,delete}
+    IDENT(permisos)
+  Evaluando...
+  => {read, write, execute}
+
+  Expr #15: CARDINALITY(C) + CARDINALITY(roles) - CARDINALITY(usuarios)
+
+========================================
+RESUMEN
+========================================
+  Variables: 6 (int:0 float:0 logic:0 set:6)
+  Expresiones: 15
+  Funciones:   0
+  Errores: 0
+
+  >>> JSON VALIDO - listo para el Bridge <<<

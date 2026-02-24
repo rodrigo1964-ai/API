@@ -1,0 +1,14 @@
+{
+  "precision": 1,
+  "variables": [
+    {"nombre": "certificaciones", "tipo": "set", "domain": ["iso9001","iso14001","iso27001","ohsas"], "value": ["iso9001", "iso27001"]},
+    {"nombre": "vigencia", "tipo": "integer", "domain": [0, 36], "value": [12, 24]},
+    {"nombre": "valido", "tipo": "logic", "domain": [true, false], "value": true}
+  ],
+  "expresiones": [
+    "vigencia >= 12",
+    "valido = true",
+    "{iso9001} SUBSET certificaciones",
+    "CARDINALITY(certificaciones) >= 2"
+  ]
+}

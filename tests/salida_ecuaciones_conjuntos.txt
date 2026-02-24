@@ -1,0 +1,106 @@
+Bridge GeCode - Validador JSON
+====================================
+
+=== PRECISION: 2 decimales (factor=100) ===
+
+=== VARIABLES ===
+  [0] x : float dom=[0..1000] val=[incert. 3 vals]
+  [1] y : float dom=[0..1000] val=[incert. 2 vals]
+  [2] z : float dom=[0..2000] val=[incert. 2 vals]
+  [3] A : set dom={} val=[incert. 2 vals]
+  [4] B : set dom={} val=[incert. 3 vals]
+  [5] permisos : set dom={} val=[incert. 2 vals]
+  [6] nivel : integer dom=[100..1000] val=[incert. 3 vals]
+
+=== EXPRESIONES ===
+  Expr #1: ((sqrt(x) = CARDINALITY(A)) AND ({a} SUBSET A))
+    [=]
+      [sqrt]
+        IDENT(x)
+  Evaluando...
+  => [false, false, false] (3 valores)
+
+  Expr #2: ((abs(x - y) > CARDINALITY(B)) OR (CARDINALITY(A UNION B) >= 4))
+    [>]
+      [abs]
+        [-]
+          IDENT(x)
+          IDENT(y)
+  Evaluando...
+  => [true, true, true, true, true, true] (6 valores)
+
+  Expr #3: ((sqr(CARDINALITY(A)) = x) AND ({b} SUBSET (A INTERSECT B)))
+    [sqr]
+  Evaluando...
+  => 0 (0.000)
+
+  Expr #4: ((CARDINALITY(permisos) + nivel = 8) OR (exp(x) > 10))
+
+  Expr #5: ((sqrt(nivel) < y) AND (CARDINALITY(A UNION B) = 5))
+    [AND]
+      [<]
+        [sqrt]
+          IDENT(nivel)
+        IDENT(y)
+  Evaluando...
+  => [false, false, false, false, false, false] (6 valores)
+
+  Expr #6: ((abs(CARDINALITY(A) - CARDINALITY(B)) = 1) OR (sin(x) < 1))
+    [abs]
+  Evaluando...
+  => 0 (0.000)
+
+  Expr #7: ((sqr(nivel) = CARDINALITY(B) * 3) AND ({write} SUBSET permisos))
+    [=]
+      [sqr]
+        IDENT(nivel)
+  Evaluando...
+  => [false, false, false] (3 valores)
+
+  Expr #8: ((CARDINALITY(A DIFFERENCE B) > 0) OR (sqrt(x) + sqrt(y) = sqrt(z)))
+
+  Expr #9: ((ln(CARDINALITY(permisos) + 1) < y) AND (CARDINALITY(B) >= 3))
+    [ln]
+  Evaluando...
+  => -2147483648 (-21474836.480)
+
+  Expr #10: ((CARDINALITY(A) * CARDINALITY(B) = nivel) OR (abs(x - y) > 2))
+
+  Expr #11: ((sqrt(CARDINALITY(A UNION B)) = sqrt(5)) AND (nivel > 3))
+    [sqrt]
+  Evaluando...
+  => 0 (0.000)
+
+  Expr #12: ((sin(nivel) + cos(nivel) < 2) OR (CARDINALITY(permisos) = 2))
+    [OR]
+      [<]
+        [+]
+          [sin]
+            IDENT(nivel)
+          [cos]
+            IDENT(nivel)
+        ENTERO(2 = 0.020)
+  Evaluando...
+  => [false, false, false, true, true, false, true, true, false] (9 valores)
+
+  Expr #13: ((CARDINALITY(A) + CARDINALITY(B) = 5) AND (sqr(y) > x))
+
+  Expr #14: ((abs(sqrt(x) - CARDINALITY(A)) < 1) OR ({c,d} SUBSET B))
+    [abs]
+      [-]
+        [sqrt]
+          IDENT(x)
+  Evaluando...
+  => [1.000, 2.000, 3.000] (3 valores)
+
+  Expr #15: ((CARDINALITY(A INTERSECT B) * nivel = 2) AND (exp(nivel) > z))
+
+========================================
+RESUMEN
+========================================
+  Variables: 7 (int:1 float:3 logic:0 set:3)
+  Expresiones: 15
+  Funciones:   0
+  Errores: 0
+
+  >>> JSON VALIDO - listo para el Bridge <<<

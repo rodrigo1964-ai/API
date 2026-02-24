@@ -1,0 +1,12 @@
+precision: 1;
+
+variables: {
+    x : integer : [1, 10] : 5;
+}
+
+expresiones: {
+    x > 2;
+}
+
+funciones: {
+}

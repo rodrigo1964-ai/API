@@ -1,0 +1,14 @@
+{
+  "precision": 0,
+  "variables": [
+    {"nombre": "herramientas", "tipo": "set", "domain": ["git","docker","jenkins","k8s","ansible"], "value": ["git", "docker", "jenkins"]},
+    {"nombre": "experiencia_meses", "tipo": "integer", "domain": [0, 120], "value": [18, 24, 36]},
+    {"nombre": "productivo", "tipo": "logic", "domain": [true, false], "value": true}
+  ],
+  "expresiones": [
+    "experiencia_meses >= 12",
+    "{git,docker} SUBSET herramientas",
+    "CARDINALITY(herramientas) >= 3",
+    "productivo = true"
+  ]
+}

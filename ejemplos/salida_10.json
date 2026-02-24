@@ -1,0 +1,37 @@
+{
+	"archivo_entrada":	"ejemplos/entrada_10.json",
+	"precision":	1,
+	"factor":	10,
+	"variables":	[{
+			"nombre":	"x",
+			"tipo":	"integer",
+			"dominio":	[1, 20],
+			"valor":	10
+		}, {
+			"nombre":	"y",
+			"tipo":	"integer",
+			"dominio":	[1, 20],
+			"valor":	5
+		}, {
+			"nombre":	"z",
+			"tipo":	"integer",
+			"dominio":	[1, 20],
+			"valor":	3
+		}],
+	"expresiones":	[{
+			"expresion":	"(x + y) * z",
+			"resultado":	450
+		}, {
+			"expresion":	"x + (y * z)",
+			"resultado":	160
+		}, {
+			"expresion":	"x * y + z",
+			"resultado":	503
+		}],
+	"resumen":	{
+		"total_variables":	3,
+		"total_expresiones":	3,
+		"errores":	0,
+		"valido":	true
+	}
+}

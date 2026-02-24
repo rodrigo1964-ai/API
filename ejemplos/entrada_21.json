@@ -1,0 +1,11 @@
+{
+  "precision": 0,
+  "variables": [
+    {"nombre": "equipo", "tipo": "set", "domain": ["dev","qa","pm","dba"], "value": ["dev", "qa"]},
+    {"nombre": "administradores", "tipo": "set", "domain": ["admin","super","root"], "value": ["admin"]}
+  ],
+  "expresiones": [
+    "CARDINALITY(equipo)",
+    "CARDINALITY({alice,bob,charlie})"
+  ]
+}

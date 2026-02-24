@@ -1,0 +1,31 @@
+{
+	"archivo_entrada":	"ejemplos/entrada_25.json",
+	"precision":	0,
+	"factor":	1,
+	"variables":	[{
+			"nombre":	"permisos",
+			"tipo":	"set",
+			"dominio":	[0, 0],
+			"valor":	["read", "write"]
+		}, {
+			"nombre":	"nivel",
+			"tipo":	"integer",
+			"dominio":	[1, 5],
+			"valor":	3
+		}, {
+			"nombre":	"autenticado",
+			"tipo":	"logic",
+			"dominio":	[true, false],
+			"valor":	true
+		}],
+	"expresiones":	[{
+			"expresion":	"autenticado = true",
+			"resultado":	true
+		}],
+	"resumen":	{
+		"total_variables":	3,
+		"total_expresiones":	4,
+		"errores":	0,
+		"valido":	true
+	}
+}

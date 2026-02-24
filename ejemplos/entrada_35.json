@@ -1,0 +1,14 @@
+{
+  "precision": 0,
+  "variables": [
+    {"nombre": "regiones", "tipo": "set", "domain": ["norte","sur","este","oeste","centro"], "value": ["norte", "sur", "este"]},
+    {"nombre": "cobertura", "tipo": "integer", "domain": [0, 100], "value": 80},
+    {"nombre": "activo", "tipo": "logic", "domain": [true, false], "value": true}
+  ],
+  "expresiones": [
+    "cobertura >= 70",
+    "CARDINALITY(regiones) >= 3",
+    "regiones UNION {centro}",
+    "activo = true"
+  ]
+}

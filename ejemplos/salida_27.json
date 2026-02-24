@@ -1,0 +1,34 @@
+{
+	"archivo_entrada":	"ejemplos/entrada_27.json",
+	"precision":	0,
+	"factor":	1,
+	"variables":	[{
+			"nombre":	"dias",
+			"tipo":	"set",
+			"dominio":	[0, 0],
+			"valor":	["lun", "mar", "mie", "jue", "vie"]
+		}, {
+			"nombre":	"horas",
+			"tipo":	"integer",
+			"dominio":	[1, 24],
+			"valor":	8
+		}, {
+			"nombre":	"turno_completo",
+			"tipo":	"logic",
+			"dominio":	[true, false],
+			"valor":	true
+		}],
+	"expresiones":	[{
+			"expresion":	"horas >= 6",
+			"resultado":	true
+		}, {
+			"expresion":	"turno_completo = true",
+			"resultado":	true
+		}],
+	"resumen":	{
+		"total_variables":	3,
+		"total_expresiones":	4,
+		"errores":	0,
+		"valido":	true
+	}
+}

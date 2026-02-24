@@ -1,0 +1,14 @@
+{
+  "precision": 2,
+  "variables": [
+    {"nombre": "protocolos", "tipo": "set", "domain": ["tcp","udp","icmp","http","https"], "value": ["tcp", "https"]},
+    {"nombre": "ancho_banda", "tipo": "float", "domain": [1.0, 1000.0], "value": [100.0, 200.0]},
+    {"nombre": "cifrado", "tipo": "logic", "domain": [true, false], "value": true}
+  ],
+  "expresiones": [
+    "cifrado = true",
+    "ancho_banda >= 50.0",
+    "{https} SUBSET protocolos",
+    "protocolos DIFFERENCE {udp,icmp}"
+  ]
+}

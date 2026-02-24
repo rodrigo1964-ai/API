@@ -1,0 +1,224 @@
+Bridge GeCode - Validador JSON
+====================================
+
+=== PRECISION: 2 decimales (factor=100) ===
+
+=== VARIABLES ===
+  [0] x : integer dom=[100..10000] val=[incert. 2 vals]
+  [1] y : integer dom=[100..5000] val=[incert. 3 vals]
+  [2] a : float dom=[0..1000] val=[incert. 2 vals]
+  [3] b : float dom=[0..500] val=[incert. 3 vals]
+  [4] c : integer dom=[-1000..1000] val=[incert. 3 vals]
+  [5] d : float dom=[0..10000] val=[incert. 2 vals]
+
+=== EXPRESIONES ===
+  Expr #1: ((x + y) * (a - b))
+    [*]
+      [+]
+        IDENT(x)
+        IDENT(y)
+      [-]
+        IDENT(a)
+        IDENT(b)
+  Evaluando...
+  => [1500.000, 750.000, -750.000, 3750.000, 3000.000, 1500.000, 2000.000, 1000.000, -1000.000, 5000.000, ...] (36 valores)
+
+  Expr #2: ((x - y) / (a + b))
+    [/]
+      [-]
+        IDENT(x)
+        IDENT(y)
+      [+]
+        IDENT(a)
+        IDENT(b)
+  Evaluando...
+  => [0.020, 0.020, 0.010, 0.010, 0.010, 0.010, 0.000, 0.000, 0.000, 0.000, ...] (36 valores)
+
+  Expr #3: ((a * b) + (x * y))
+    [+]
+      [*]
+        IDENT(a)
+        IDENT(b)
+      [*]
+        IDENT(x)
+        IDENT(y)
+  Evaluando...
+  => [5075.000, 10075.000, 15075.000, 10075.000, 20075.000, 30075.000, 5150.000, 10150.000, 15150.000, 10150.000, ...] (36 valores)
+
+  Expr #4: ((x / 2) - (a * 3))
+    [-]
+      [/]
+        IDENT(x)
+        ENTERO(2 = 0.020)
+      [*]
+        IDENT(a)
+        ENTERO(3 = 0.030)
+  Evaluando...
+  => [0.500, -4.000, 5.500, 1.000] (4 valores)
+
+  Expr #5: (((x + y) * a) / (b + 1))
+    [/]
+      [*]
+        [+]
+          IDENT(x)
+          IDENT(y)
+        IDENT(a)
+      [+]
+        IDENT(b)
+        ENTERO(1 = 0.010)
+  Evaluando...
+  => [44.110, 22.270, 11.190, 88.230, 44.550, 22.380, 58.820, 29.700, 14.920, 117.640, ...] (36 valores)
+
+  Expr #6: ((sqr(a) + sqr(b)) * (x - y))
+    [*]
+      [+]
+        [sqr]
+          IDENT(a)
+        [sqr]
+          IDENT(b)
+      [-]
+        IDENT(x)
+        IDENT(y)
+  Evaluando...
+  => [1250.000, 0.000, -1250.000, 3750.000, 2500.000, 1250.000, 1625.000, 0.000, -1625.000, 4875.000, ...] (36 valores)
+
+  Expr #7: ((x * (y + c)) - (a * (b + d)))
+    [-]
+      [*]
+        IDENT(x)
+        [+]
+          IDENT(y)
+          IDENT(c)
+      [*]
+        IDENT(a)
+        [+]
+          IDENT(b)
+          IDENT(d)
+  Evaluando...
+  => [1425.000, -825.000, 1350.000, -900.000, 1200.000, -1050.000, -150.000, -4650.000, -300.000, -4800.000, ...] (216 valores)
+
+  Expr #8: (((a + b) * (x - c)) / (y + 1))
+    [/]
+      [*]
+        [+]
+          IDENT(a)
+          IDENT(b)
+        [-]
+          IDENT(x)
+          IDENT(c)
+      [+]
+        IDENT(y)
+        ENTERO(1 = 0.010)
+  Evaluando...
+  => [4.790, 2.390, 1.590, 3.990, 1.990, 1.330, 3.190, 1.590, 1.060, 8.780, ...] (108 valores)
+
+  Expr #9: ((abs(c) * a) + (sqrt(d) * b))
+    [+]
+      [*]
+        [abs]
+          IDENT(c)
+        IDENT(a)
+      [*]
+        [sqrt]
+          IDENT(d)
+        IDENT(b)
+  Evaluando...
+  => [458.000, 616.000, 932.000, 550.000, 800.000, 1300.000, 758.000, 916.000, 1232.000, 850.000, ...] (36 valores)
+
+  Expr #10: ((x + (y * 2)) - ((a + b) * c))
+    [-]
+      [+]
+        IDENT(x)
+        [*]
+          IDENT(y)
+          ENTERO(2 = 0.020)
+      [*]
+        [+]
+          IDENT(a)
+          IDENT(b)
+        IDENT(c)
+  Evaluando...
+  => [420.000, 20.000, -380.000, 520.000, 20.000, -480.000, 720.000, 20.000, -680.000, 720.000, ...] (108 valores)
+
+  Expr #11: (((x / y) + (a / b)) * c)
+    [*]
+      [+]
+        [/]
+          IDENT(x)
+          IDENT(y)
+        [/]
+          IDENT(a)
+          IDENT(b)
+      IDENT(c)
+  Evaluando...
+  => [-10.000, 0.000, 10.000, -6.000, 0.000, 6.000, -4.000, 0.000, 4.000, -16.000, ...] (108 valores)
+
+  Expr #12: ((sin(a) + cos(b)) * (x + y))
+    [*]
+      [+]
+        [sin]
+          IDENT(a)
+        [cos]
+          IDENT(b)
+      [+]
+        IDENT(x)
+        IDENT(y)
+  Evaluando...
+  => [2790.000, 3720.000, 4650.000, 4650.000, 5580.000, 6510.000, 2295.000, 3060.000, 3825.000, 3825.000, ...] (36 valores)
+
+  Expr #13: ((exp(a) - ln(d)) * (y - c))
+    [*]
+      [-]
+        [exp]
+          IDENT(a)
+        [ln]
+          IDENT(d)
+      [-]
+        IDENT(y)
+        IDENT(c)
+  Evaluando...
+  => [1526.000, 1090.000, 654.000, 2616.000, 2180.000, 1744.000, 3706.000, 3270.000, 2834.000, 889.000, ...] (36 valores)
+
+  Expr #14: (((x + a) * (y - b)) / ((c + 5) * d))
+    [/]
+      [*]
+        [+]
+          IDENT(x)
+          IDENT(a)
+        [-]
+          IDENT(y)
+          IDENT(b)
+      [*]
+        [+]
+          IDENT(c)
+          ENTERO(5 = 0.050)
+        IDENT(d)
+  Evaluando...
+  => [-0.020, -0.010, 1.030, 0.410, 0.020, 0.010, -0.020, 0.000, 0.920, 0.360, ...] (216 valores)
+
+  Expr #15: ((sqr(x - y) + abs(a - b)) * (c + d))
+    [*]
+      [+]
+        [sqr]
+          [-]
+            IDENT(x)
+            IDENT(y)
+        [abs]
+          [-]
+            IDENT(a)
+            IDENT(b)
+      [+]
+        IDENT(c)
+        IDENT(d)
+  Evaluando...
+  => [20800.000, 59800.000, 26000.000, 65000.000, 31200.000, 70200.000, 20400.000, 58650.000, 25500.000, 63750.000, ...] (216 valores)
+
+========================================
+RESUMEN
+========================================
+  Variables: 6 (int:3 float:3 logic:0 set:0)
+  Expresiones: 15
+  Funciones:   0
+  Errores: 0
+
+  >>> JSON VALIDO - listo para el Bridge <<<

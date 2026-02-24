@@ -1,0 +1,10 @@
+{
+  "precision": 2,
+  "variables": [
+    {"nombre": "base", "tipo": "float", "domain": [0.0, 100.0], "value": 10.0},
+    {"nombre": "altura", "tipo": "float", "domain": [0.0, 100.0], "value": 5.5}
+  ],
+  "expresiones": [
+    "(base * altura) / 2"
+  ]
+}

@@ -1,0 +1,168 @@
+Bridge GeCode - Validador JSON
+====================================
+
+=== PRECISION: 2 decimales (factor=100) ===
+
+=== VARIABLES ===
+  [0] x : integer dom=[100..10000] val=[incert. 3 vals]
+  [1] y : integer dom=[100..5000] val=[incert. 2 vals]
+  [2] a : float dom=[0..1000] val=[incert. 2 vals]
+  [3] b : float dom=[0..500] val=[incert. 2 vals]
+  [4] activo : logic dom={0,1} val=[incert. 2 vals]
+  [5] validado : logic dom={0,1} val=[incert. 2 vals]
+  [6] A : set dom={} val=[incert. 2 vals]
+  [7] B : set dom={} val=[incert. 1 vals]
+  [8] permisos : set dom={} val=[incert. 2 vals]
+  [9] nivel : integer dom=[100..1000] val=[incert. 3 vals]
+
+=== EXPRESIONES ===
+  Expr #1: ((activo AND (x > y)) OR ((CARDINALITY(A) >= 2) AND (a > b)))
+    [OR]
+      [AND]
+        IDENT(activo)
+        [>]
+          IDENT(x)
+          IDENT(y)
+  Evaluando...
+  => [true, false, true, true, true, true, false, false, false, false, ...] (12 valores)
+
+  Expr #2: (((x + y) * a) >= ((CARDINALITY(B) + nivel) * b))
+    [>=]
+      [*]
+        [+]
+          IDENT(x)
+          IDENT(y)
+        IDENT(a)
+  Evaluando...
+  => [true, true, true, true, true, true, true, true, true, true, ...] (12 valores)
+
+  Expr #3: ((validado IMPLICA (nivel >= 5)) AND (({write} SUBSET permisos) OR (x > 15)))
+    [AND]
+      [IMPLICA]
+        IDENT(validado)
+        [>=]
+          IDENT(nivel)
+          ENTERO(5 = 0.050)
+  Evaluando...
+  => [false, false, false, false, false, false] (6 valores)
+
+  Expr #4: (((a * b) + (x / 2)) > ((CARDINALITY(A UNION B) * 2) + nivel))
+    [>]
+      [+]
+        [*]
+          IDENT(a)
+          IDENT(b)
+        [/]
+          IDENT(x)
+          ENTERO(2 = 0.020)
+  Evaluando...
+  => [true, true, true, true, true, true, true, true, true, true, ...] (12 valores)
+
+  Expr #5: ((activo AND validado) OR ((sqr(a) > x) AND ({bob} SUBSET A)))
+    [OR]
+      [AND]
+        IDENT(activo)
+        IDENT(validado)
+      [AND]
+        [>]
+          [sqr]
+            IDENT(a)
+          IDENT(x)
+  Evaluando...
+  => [true, true, true, true, true, true, false, false, false, false, ...] (24 valores)
+
+  Expr #6: (((x - y) * (a + b)) <= ((CARDINALITY(permisos) * nivel) + 10))
+    [<=]
+      [*]
+        [-]
+          IDENT(x)
+          IDENT(y)
+        [+]
+          IDENT(a)
+          IDENT(b)
+  Evaluando...
+  => [false, false, false, false, true, true, true, true, false, false, ...] (24 valores)
+
+  Expr #7: ((({alice} SUBSET A) AND (nivel > 3)) IMPLICA ((activo OR validado) AND (a < b)))
+
+  Expr #8: (((CARDINALITY(A) + CARDINALITY(B)) * a) > ((x + y) * b))
+
+  Expr #9: ((activo AND (sqrt(x) > a)) OR ((CARDINALITY(permisos) >= 2) AND validado))
+    [OR]
+      [AND]
+        IDENT(activo)
+        [>]
+          [sqrt]
+            IDENT(x)
+          IDENT(a)
+  Evaluando...
+  => [true, true, true, true, true, true, false, false, false, false, ...] (12 valores)
+
+  Expr #10: (((abs(x - y) * b) + nivel) >= ((CARDINALITY(A UNION B) * 3) - (a * 2)))
+    [>=]
+      [+]
+        [*]
+          [abs]
+            [-]
+              IDENT(x)
+              IDENT(y)
+          IDENT(b)
+        IDENT(nivel)
+  Evaluando...
+  => [true, true, true, true, true, true, true, true, true, true, ...] (36 valores)
+
+  Expr #11: ((validado IMPLICA ({read,write} SUBSET permisos)) AND ((x * a) > (y * b)))
+    [IMPLICA]
+      IDENT(validado)
+  Evaluando...
+  => [false, true] (2 valores)
+
+  Expr #12: (((sin(a) + cos(b)) * nivel) <= ((CARDINALITY(B) + 1) * (x - y)))
+    [<=]
+      [*]
+        [+]
+          [sin]
+            IDENT(a)
+          [cos]
+            IDENT(b)
+        IDENT(nivel)
+  Evaluando...
+  => [false, false, false, false, false, false, false, false, false, true, ...] (12 valores)
+
+  Expr #13: ((activo OR ((nivel >= 5) AND {charlie} SUBSET B)) AND ((a + b) > (x / 10)))
+    [OR]
+      IDENT(activo)
+      [AND]
+        [>=]
+          IDENT(nivel)
+          ENTERO(5 = 0.050)
+  Evaluando...
+  => [true, true, true, false, false, false] (6 valores)
+
+  Expr #14: (((CARDINALITY(A) * x) - (CARDINALITY(B) * y)) >= ((a - b) * nivel))
+
+  Expr #15: ((((x > y) AND activo) OR ((a > b) AND validado)) IMPLICA (CARDINALITY(A UNION B) >= 3))
+    [IMPLICA]
+      [OR]
+        [AND]
+          [>]
+            IDENT(x)
+            IDENT(y)
+          IDENT(activo)
+        [AND]
+          [>]
+            IDENT(a)
+            IDENT(b)
+          IDENT(validado)
+  Evaluando...
+  => [false, false, false, false, false, false, false, false, false, true, ...] (96 valores)
+
+========================================
+RESUMEN
+========================================
+  Variables: 10 (int:3 float:2 logic:2 set:3)
+  Expresiones: 15
+  Funciones:   0
+  Errores: 0
+
+  >>> JSON VALIDO - listo para el Bridge <<<

@@ -1,0 +1,14 @@
+{
+  "precision": 0,
+  "variables": [
+    {"nombre": "productos", "tipo": "set", "domain": ["laptop","mouse","teclado","monitor","usb"], "value": ["laptop", "mouse", "teclado"]},
+    {"nombre": "stock", "tipo": "integer", "domain": [0, 1000], "value": [50, 100]},
+    {"nombre": "disponible", "tipo": "logic", "domain": [true, false], "value": true}
+  ],
+  "expresiones": [
+    "disponible = true",
+    "stock > 0",
+    "CARDINALITY(productos) >= 3",
+    "productos INTERSECT {laptop,monitor}"
+  ]
+}

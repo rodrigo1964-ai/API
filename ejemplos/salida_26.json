@@ -1,0 +1,37 @@
+{
+	"archivo_entrada":	"ejemplos/entrada_26.json",
+	"precision":	1,
+	"factor":	10,
+	"variables":	[{
+			"nombre":	"materiales",
+			"tipo":	"set",
+			"dominio":	[0, 0],
+			"valor":	["acero", "cobre"]
+		}, {
+			"nombre":	"cantidad",
+			"tipo":	"integer",
+			"dominio":	[100, 10000],
+			"valor":	[500, 1000, 1500]
+		}, {
+			"nombre":	"costo_unitario",
+			"tipo":	"float",
+			"dominio":	[1, 100],
+			"valor":	15.5
+		}],
+	"expresiones":	[{
+			"expresion":	"cantidad >= 500",
+			"resultado":	[true, true, true]
+		}, {
+			"expresion":	"costo_unitario * cantidad <= 25000",
+			"resultado":	[false, false, false]
+		}, {
+			"expresion":	"materiales UNION {plastico,vidrio}",
+			"resultado":	["acero", "cobre"]
+		}],
+	"resumen":	{
+		"total_variables":	3,
+		"total_expresiones":	4,
+		"errores":	0,
+		"valido":	true
+	}
+}

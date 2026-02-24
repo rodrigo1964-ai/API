@@ -1,0 +1,29 @@
+{
+	"archivo_entrada":	"ejemplos/entrada_14.json",
+	"precision":	1,
+	"factor":	10,
+	"variables":	[{
+			"nombre":	"a",
+			"tipo":	"logic",
+			"dominio":	[true, false],
+			"valor":	[true, false]
+		}, {
+			"nombre":	"b",
+			"tipo":	"logic",
+			"dominio":	[true, false],
+			"valor":	[true, false]
+		}],
+	"expresiones":	[{
+			"expresion":	"a AND b",
+			"resultado":	[true, false, false, false]
+		}, {
+			"expresion":	"a OR b",
+			"resultado":	[true, true, true, false]
+		}],
+	"resumen":	{
+		"total_variables":	2,
+		"total_expresiones":	2,
+		"errores":	0,
+		"valido":	true
+	}
+}

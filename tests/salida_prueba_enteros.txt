@@ -1,0 +1,139 @@
+Bridge GeCode - Validador JSON
+====================================
+
+=== PRECISION: 0 decimales (factor=1) ===
+
+=== VARIABLES ===
+  [0] x : integer dom=[1..100] val=[incert. 3 vals]
+  [1] y : integer dom=[1..50] val=[incert. 2 vals]
+  [2] z : integer dom=[0..200] val=[incert. 4 vals]
+  [3] a : integer dom=[-10..10] val=[incert. 3 vals]
+  [4] b : integer dom=[1..20] val=[incert. 3 vals]
+
+=== EXPRESIONES ===
+  Expr #1: x
+    IDENT(x)
+  Evaluando...
+  => [10, 20, 30] (3 valores)
+
+  Expr #2: x + y
+    [+]
+      IDENT(x)
+      IDENT(y)
+  Evaluando...
+  => [15, 25, 25, 35, 35, 45] (6 valores)
+
+  Expr #3: x - y
+    [-]
+      IDENT(x)
+      IDENT(y)
+  Evaluando...
+  => [5, -5, 15, 5, 25, 15] (6 valores)
+
+  Expr #4: x * y
+    [*]
+      IDENT(x)
+      IDENT(y)
+  Evaluando...
+  => [50, 150, 100, 300, 150, 450] (6 valores)
+
+  Expr #5: x + y + z
+    [+]
+      [+]
+        IDENT(x)
+        IDENT(y)
+      IDENT(z)
+  Evaluando...
+  => [40, 65, 90, 115, 50, 75, 100, 125, 50, 75, ...] (24 valores)
+
+  Expr #6: x * y + z
+    [+]
+      [*]
+        IDENT(x)
+        IDENT(y)
+      IDENT(z)
+  Evaluando...
+  => [75, 100, 125, 150, 175, 200, 225, 250, 125, 150, ...] (24 valores)
+
+  Expr #7: x - y * 2
+    [-]
+      IDENT(x)
+      [*]
+        IDENT(y)
+        ENTERO(2)
+  Evaluando...
+  => [0, -20, 10, -10, 20, 0] (6 valores)
+
+  Expr #8: (x + y) * a
+    [*]
+      [+]
+        IDENT(x)
+        IDENT(y)
+      IDENT(a)
+  Evaluando...
+  => [-75, 0, 75, -125, 0, 125, -125, 0, 125, -175, ...] (18 valores)
+
+  Expr #9: x / 5 + y
+    [+]
+      [/]
+        IDENT(x)
+        ENTERO(5)
+      IDENT(y)
+  Evaluando...
+  => [7, 17, 9, 19, 11, 21] (6 valores)
+
+  Expr #10: abs(a)
+    [abs]
+      IDENT(a)
+  Evaluando...
+  => [5, 0, 5] (3 valores)
+
+  Expr #11: sqr(y)
+    [sqr]
+      IDENT(y)
+  Evaluando...
+  => [25, 225] (2 valores)
+
+  Expr #12: x > y
+    [>]
+      IDENT(x)
+      IDENT(y)
+  Evaluando...
+  => [true, false, true, true, true, true] (6 valores)
+
+  Expr #13: z >= 50
+    [>=]
+      IDENT(z)
+      ENTERO(50)
+  Evaluando...
+  => [false, true, true, true] (4 valores)
+
+  Expr #14: (x + y) <= z
+    [<=]
+      [+]
+        IDENT(x)
+        IDENT(y)
+      IDENT(z)
+  Evaluando...
+  => [true, true, true, true, true, true, true, true, true, true, ...] (24 valores)
+
+  Expr #15: x * b - y * a
+    [-]
+      [*]
+        IDENT(x)
+        IDENT(b)
+      [*]
+        IDENT(y)
+        IDENT(a)
+  Evaluando...
+  => [45, 20, -5, 95, 20, -55, 65, 40, 15, 115, ...] (54 valores)
+
+========================================
+RESUMEN
+========================================
+  Variables: 5 (int:5 float:0 logic:0 set:0)
+  Expresiones: 15
+  Funciones:   0
+  Errores: 0
+
+  >>> JSON VALIDO - listo para el Bridge <<<

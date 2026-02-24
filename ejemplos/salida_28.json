@@ -1,0 +1,37 @@
+{
+	"archivo_entrada":	"ejemplos/entrada_28.json",
+	"precision":	2,
+	"factor":	100,
+	"variables":	[{
+			"nombre":	"protocolos",
+			"tipo":	"set",
+			"dominio":	[0, 0],
+			"valor":	["tcp", "https"]
+		}, {
+			"nombre":	"ancho_banda",
+			"tipo":	"float",
+			"dominio":	[1, 1000],
+			"valor":	[100, 200]
+		}, {
+			"nombre":	"cifrado",
+			"tipo":	"logic",
+			"dominio":	[true, false],
+			"valor":	true
+		}],
+	"expresiones":	[{
+			"expresion":	"cifrado = true",
+			"resultado":	true
+		}, {
+			"expresion":	"ancho_banda >= 50.0",
+			"resultado":	[true, true]
+		}, {
+			"expresion":	"protocolos DIFFERENCE {udp,icmp}",
+			"resultado":	["tcp", "https"]
+		}],
+	"resumen":	{
+		"total_variables":	3,
+		"total_expresiones":	4,
+		"errores":	0,
+		"valido":	true
+	}
+}

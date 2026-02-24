@@ -1,0 +1,14 @@
+(* Test de operador IN *)
+
+precision: 0;
+
+variables: {
+    x : integer : [1, 10] : 5;
+}
+
+expresiones: {
+    5 IN {1,3,5,7,9};
+}
+
+funciones: {
+}

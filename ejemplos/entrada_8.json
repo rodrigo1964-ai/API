@@ -1,0 +1,9 @@
+{
+  "precision": 2,
+  "variables": [
+    {"nombre": "radio", "tipo": "float", "domain": [0.0, 100.0], "value": 5.0}
+  ],
+  "expresiones": [
+    "radio * radio"
+  ]
+}

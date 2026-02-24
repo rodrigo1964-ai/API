@@ -1,0 +1,15 @@
+{
+  "precision": 0,
+  "variables": [
+    {"nombre": "equipoActual", "tipo": "set", "domain": ["dev","qa","pm","ops","dba"], "value": ["dev", "qa"]},
+    {"nombre": "equipoNecesario", "tipo": "set", "domain": ["dev","qa","pm","ops","dba"], "value": ["qa", "pm", "ops"]},
+    {"nombre": "presupuesto", "tipo": "integer", "domain": [1000, 50000], "value": 25000},
+    {"nombre": "activo", "tipo": "logic", "domain": [true, false], "value": true}
+  ],
+  "expresiones": [
+    "activo = true",
+    "presupuesto > 20000",
+    "CARDINALITY(equipoActual) >= 2",
+    "CARDINALITY(equipoActual UNION equipoNecesario) <= 5"
+  ]
+}

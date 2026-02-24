@@ -1,0 +1,10 @@
+{
+  "precision": 1,
+  "variables": [
+    {"nombre": "x", "tipo": "integer", "domain": [-10, 10], "value": -5}
+  ],
+  "expresiones": [
+    "abs(x)",
+    "x * x"
+  ]
+}

@@ -1,0 +1,37 @@
+{
+	"archivo_entrada":	"ejemplos/entrada_35.json",
+	"precision":	0,
+	"factor":	1,
+	"variables":	[{
+			"nombre":	"regiones",
+			"tipo":	"set",
+			"dominio":	[0, 0],
+			"valor":	["norte", "sur", "este"]
+		}, {
+			"nombre":	"cobertura",
+			"tipo":	"integer",
+			"dominio":	[0, 100],
+			"valor":	80
+		}, {
+			"nombre":	"activo",
+			"tipo":	"logic",
+			"dominio":	[true, false],
+			"valor":	true
+		}],
+	"expresiones":	[{
+			"expresion":	"cobertura >= 70",
+			"resultado":	true
+		}, {
+			"expresion":	"regiones UNION {centro}",
+			"resultado":	["norte", "sur", "este"]
+		}, {
+			"expresion":	"activo = true",
+			"resultado":	true
+		}],
+	"resumen":	{
+		"total_variables":	3,
+		"total_expresiones":	4,
+		"errores":	0,
+		"valido":	true
+	}
+}

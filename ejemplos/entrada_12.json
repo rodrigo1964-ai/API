@@ -1,0 +1,10 @@
+{
+  "precision": 0,
+  "variables": [
+    {"nombre": "edad", "tipo": "integer", "domain": [1, 100], "value": 25},
+    {"nombre": "mayor_edad", "tipo": "logic", "domain": [true, false], "value": null}
+  ],
+  "expresiones": [
+    "edad >= 18"
+  ]
+}

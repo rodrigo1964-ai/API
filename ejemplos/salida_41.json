@@ -1,0 +1,42 @@
+{
+	"archivo_entrada":	"ejemplos/entrada_41.json",
+	"precision":	1,
+	"factor":	10,
+	"variables":	[{
+			"nombre":	"componentes",
+			"tipo":	"set",
+			"dominio":	[0, 0],
+			"valor":	["cpu", "ram", "ssd"]
+		}, {
+			"nombre":	"capacidad_gb",
+			"tipo":	"integer",
+			"dominio":	[4, 128],
+			"valor":	[16, 32]
+		}, {
+			"nombre":	"temperatura_c",
+			"tipo":	"float",
+			"dominio":	[20, 90],
+			"valor":	[45.5, 50.2]
+		}, {
+			"nombre":	"funcionando",
+			"tipo":	"logic",
+			"dominio":	[true, false],
+			"valor":	true
+		}],
+	"expresiones":	[{
+			"expresion":	"temperatura_c < 80.0",
+			"resultado":	[true, true]
+		}, {
+			"expresion":	"capacidad_gb >= 16",
+			"resultado":	[true, true]
+		}, {
+			"expresion":	"funcionando = true",
+			"resultado":	true
+		}],
+	"resumen":	{
+		"total_variables":	4,
+		"total_expresiones":	5,
+		"errores":	0,
+		"valido":	true
+	}
+}

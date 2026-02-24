@@ -1,0 +1,26 @@
+{
+	"archivo_entrada":	"ejemplos/entrada_15.json",
+	"precision":	2,
+	"factor":	100,
+	"variables":	[{
+			"nombre":	"base",
+			"tipo":	"float",
+			"dominio":	[0, 100],
+			"valor":	10
+		}, {
+			"nombre":	"altura",
+			"tipo":	"float",
+			"dominio":	[0, 100],
+			"valor":	5.5
+		}],
+	"expresiones":	[{
+			"expresion":	"(base * altura) / 2",
+			"resultado":	2750
+		}],
+	"resumen":	{
+		"total_variables":	2,
+		"total_expresiones":	1,
+		"errores":	0,
+		"valido":	true
+	}
+}

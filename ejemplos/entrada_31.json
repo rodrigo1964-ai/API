@@ -1,0 +1,14 @@
+{
+  "precision": 0,
+  "variables": [
+    {"nombre": "vehiculos", "tipo": "set", "domain": ["auto","moto","camion","bus"], "value": ["auto", "moto"]},
+    {"nombre": "pasajeros", "tipo": "integer", "domain": [1, 50], "value": [2, 4]},
+    {"nombre": "operativo", "tipo": "logic", "domain": [true, false], "value": true}
+  ],
+  "expresiones": [
+    "operativo = true",
+    "pasajeros <= 5",
+    "{auto,moto} SUBSET vehiculos",
+    "vehiculos DIFFERENCE {camion,bus}"
+  ]
+}

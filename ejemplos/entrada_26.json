@@ -1,0 +1,14 @@
+{
+  "precision": 1,
+  "variables": [
+    {"nombre": "materiales", "tipo": "set", "domain": ["acero","aluminio","cobre","plastico"], "value": ["acero", "cobre"]},
+    {"nombre": "cantidad", "tipo": "integer", "domain": [100, 10000], "value": [500, 1000, 1500]},
+    {"nombre": "costo_unitario", "tipo": "float", "domain": [1.0, 100.0], "value": 15.5}
+  ],
+  "expresiones": [
+    "cantidad >= 500",
+    "costo_unitario * cantidad <= 25000",
+    "materiales UNION {plastico,vidrio}",
+    "CARDINALITY(materiales) <= 3"
+  ]
+}

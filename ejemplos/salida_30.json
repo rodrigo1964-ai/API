@@ -1,0 +1,34 @@
+{
+	"archivo_entrada":	"ejemplos/entrada_30.json",
+	"precision":	1,
+	"factor":	10,
+	"variables":	[{
+			"nombre":	"idiomas",
+			"tipo":	"set",
+			"dominio":	[0, 0],
+			"valor":	["esp", "eng"]
+		}, {
+			"nombre":	"experiencia",
+			"tipo":	"integer",
+			"dominio":	[0, 20],
+			"valor":	[3, 5, 7]
+		}, {
+			"nombre":	"certificado",
+			"tipo":	"logic",
+			"dominio":	[true, false],
+			"valor":	[true, false]
+		}],
+	"expresiones":	[{
+			"expresion":	"experiencia >= 3",
+			"resultado":	[true, true, true]
+		}, {
+			"expresion":	"certificado = true",
+			"resultado":	[true, false]
+		}],
+	"resumen":	{
+		"total_variables":	3,
+		"total_expresiones":	4,
+		"errores":	0,
+		"valido":	true
+	}
+}

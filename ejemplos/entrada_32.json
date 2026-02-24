@@ -1,0 +1,14 @@
+{
+  "precision": 2,
+  "variables": [
+    {"nombre": "sensores", "tipo": "set", "domain": ["temp","hum","pres","luz","mov"], "value": ["temp", "hum", "luz"]},
+    {"nombre": "temperatura", "tipo": "float", "domain": [-20.0, 60.0], "value": [22.5, 25.0]},
+    {"nombre": "activo", "tipo": "logic", "domain": [true, false], "value": true}
+  ],
+  "expresiones": [
+    "temperatura >= 15.0 AND temperatura <= 30.0",
+    "CARDINALITY(sensores) >= 3",
+    "{temp} SUBSET sensores",
+    "activo = true"
+  ]
+}

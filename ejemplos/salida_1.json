@@ -1,0 +1,32 @@
+{
+	"archivo_entrada":	"ejemplos/entrada_1.json",
+	"precision":	0,
+	"factor":	1,
+	"variables":	[{
+			"nombre":	"a",
+			"tipo":	"integer",
+			"dominio":	[1, 100],
+			"valor":	5
+		}, {
+			"nombre":	"b",
+			"tipo":	"integer",
+			"dominio":	[1, 100],
+			"valor":	3
+		}],
+	"expresiones":	[{
+			"expresion":	"a + b",
+			"resultado":	8
+		}, {
+			"expresion":	"a - b",
+			"resultado":	2
+		}, {
+			"expresion":	"a * b",
+			"resultado":	15
+		}],
+	"resumen":	{
+		"total_variables":	2,
+		"total_expresiones":	3,
+		"errores":	0,
+		"valido":	true
+	}
+}

@@ -1,0 +1,16 @@
+{
+  "precision": 1,
+  "variables": [
+    {"nombre": "componentes", "tipo": "set", "domain": ["cpu","gpu","ram","ssd","hdd"], "value": ["cpu", "ram", "ssd"]},
+    {"nombre": "capacidad_gb", "tipo": "integer", "domain": [4, 128], "value": [16, 32]},
+    {"nombre": "temperatura_c", "tipo": "float", "domain": [20.0, 90.0], "value": [45.5, 50.2]},
+    {"nombre": "funcionando", "tipo": "logic", "domain": [true, false], "value": true}
+  ],
+  "expresiones": [
+    "temperatura_c < 80.0",
+    "capacidad_gb >= 16",
+    "{cpu,ram} SUBSET componentes",
+    "CARDINALITY(componentes) = 3",
+    "funcionando = true"
+  ]
+}

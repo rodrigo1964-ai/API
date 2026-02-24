@@ -1,0 +1,29 @@
+{
+  "precision": 2,
+  "variables": [
+    {"nombre": "x", "tipo": "float", "domain": [0.0, 10.0], "value": [1.0, 2.0, 4.0]},
+    {"nombre": "y", "tipo": "float", "domain": [0.0, 10.0], "value": [2.0, 3.0]},
+    {"nombre": "z", "tipo": "float", "domain": [0.0, 20.0], "value": [5.0, 10.0]},
+    {"nombre": "a", "tipo": "integer", "domain": [1, 100], "value": [10, 20, 30]},
+    {"nombre": "b", "tipo": "integer", "domain": [1, 50], "value": [5, 15]},
+    {"nombre": "activo", "tipo": "logic", "domain": [true, false], "value": [true, false]},
+    {"nombre": "validado", "tipo": "logic", "domain": [true, false], "value": [true, false]}
+  ],
+  "expresiones": [
+    "((sqrt(x) = sqrt(y - 1)) AND activo)",
+    "((abs(x - y) > 1) OR (sin(x) < cos(y)))",
+    "((sqr(x) + sqr(y) = sqr(z)) IMPLICA validado)",
+    "((exp(x) > exp(y)) AND (ln(z) < ln(x + y)))",
+    "((sqrt(a) >= b) OR ((abs(a - b) < 10) AND activo))",
+    "((sin(x) = cos(y - 1.57)) AND (activo OR validado))",
+    "((sqr(sqrt(x)) = x) IMPLICA (validado AND (y > 0)))",
+    "((abs(sin(x)) < 1) AND ((cos(y) >= 0) OR activo))",
+    "((exp(ln(x)) = x) OR ((sqrt(sqr(y)) = y) AND validado))",
+    "((abs(x - y) = abs(y - x)) AND (activo IMPLICA validado))",
+    "((sin(x) * sin(x) + cos(x) * cos(x) = 1) OR (NOT activo))",
+    "((sqrt(x * x + y * y) > z) AND ((a > b) OR validado))",
+    "((ln(exp(x)) = x) IMPLICA ((abs(a - b) > 5) AND activo))",
+    "((sqr(x) - sqr(y) = (x + y) * (x - y)) OR (validado AND (z > 5)))",
+    "((sqrt(a) * sqrt(b) = sqrt(a * b)) AND ((activo OR validado) IMPLICA (x < y)))"
+  ]
+}

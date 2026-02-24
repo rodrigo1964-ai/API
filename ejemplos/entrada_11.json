@@ -1,0 +1,9 @@
+{
+  "precision": 1,
+  "variables": [
+    {"nombre": "a", "tipo": "integer", "domain": [1, 100], "value": 16}
+  ],
+  "expresiones": [
+    "sqrt(a)"
+  ]
+}

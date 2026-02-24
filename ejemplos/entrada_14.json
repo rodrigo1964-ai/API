@@ -1,0 +1,11 @@
+{
+  "precision": 1,
+  "variables": [
+    {"nombre": "a", "tipo": "logic", "domain": [true, false], "value": [true, false]},
+    {"nombre": "b", "tipo": "logic", "domain": [true, false], "value": [true, false]}
+  ],
+  "expresiones": [
+    "a AND b",
+    "a OR b"
+  ]
+}

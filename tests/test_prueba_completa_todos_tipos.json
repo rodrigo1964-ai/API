@@ -1,0 +1,32 @@
+{
+  "precision": 2,
+  "variables": [
+    {"nombre": "x", "tipo": "integer", "domain": [1, 100], "value": [10, 20, 30]},
+    {"nombre": "y", "tipo": "integer", "domain": [1, 50], "value": [5, 15]},
+    {"nombre": "a", "tipo": "float", "domain": [0.0, 10.0], "value": [1.5, 3.0]},
+    {"nombre": "b", "tipo": "float", "domain": [0.0, 5.0], "value": [0.5, 2.0]},
+    {"nombre": "activo", "tipo": "logic", "domain": [true, false], "value": [true, false]},
+    {"nombre": "validado", "tipo": "logic", "domain": [true, false], "value": [true, false]},
+    {"nombre": "A", "tipo": "set", "domain": ["alice","bob","charlie"], "value": ["alice","bob"]},
+    {"nombre": "B", "tipo": "set", "domain": ["bob","charlie","diana"], "value": ["charlie"]},
+    {"nombre": "permisos", "tipo": "set", "domain": ["read","write","execute"], "value": ["read","write"]},
+    {"nombre": "nivel", "tipo": "integer", "domain": [1, 10], "value": [2, 5, 8]}
+  ],
+  "expresiones": [
+    "((activo AND (x > y)) OR ((CARDINALITY(A) >= 2) AND (a > b)))",
+    "(((x + y) * a) >= ((CARDINALITY(B) + nivel) * b))",
+    "((validado IMPLICA (nivel >= 5)) AND (({write} SUBSET permisos) OR (x > 15)))",
+    "(((a * b) + (x / 2)) > ((CARDINALITY(A UNION B) * 2) + nivel))",
+    "((activo AND validado) OR ((sqr(a) > x) AND ({bob} SUBSET A)))",
+    "(((x - y) * (a + b)) <= ((CARDINALITY(permisos) * nivel) + 10))",
+    "((({alice} SUBSET A) AND (nivel > 3)) IMPLICA ((activo OR validado) AND (a < b)))",
+    "(((CARDINALITY(A) + CARDINALITY(B)) * a) > ((x + y) * b))",
+    "((activo AND (sqrt(x) > a)) OR ((CARDINALITY(permisos) >= 2) AND validado))",
+    "(((abs(x - y) * b) + nivel) >= ((CARDINALITY(A UNION B) * 3) - (a * 2)))",
+    "((validado IMPLICA ({read,write} SUBSET permisos)) AND ((x * a) > (y * b)))",
+    "(((sin(a) + cos(b)) * nivel) <= ((CARDINALITY(B) + 1) * (x - y)))",
+    "((activo OR ((nivel >= 5) AND {charlie} SUBSET B)) AND ((a + b) > (x / 10)))",
+    "(((CARDINALITY(A) * x) - (CARDINALITY(B) * y)) >= ((a - b) * nivel))",
+    "((((x > y) AND activo) OR ((a > b) AND validado)) IMPLICA (CARDINALITY(A UNION B) >= 3))"
+  ]
+}

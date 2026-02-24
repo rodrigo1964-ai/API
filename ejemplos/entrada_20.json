@@ -1,0 +1,13 @@
+{
+  "precision": 2,
+  "variables": [
+    {"nombre": "x1", "tipo": "float", "domain": [0.0, 10.0], "value": 3.5},
+    {"nombre": "x2", "tipo": "float", "domain": [0.0, 10.0], "value": 4.2},
+    {"nombre": "x3", "tipo": "float", "domain": [0.0, 10.0], "value": 2.8}
+  ],
+  "expresiones": [
+    "x1 + x2 + x3",
+    "(x1 * x2) + x3",
+    "x1 + (x2 * x3)"
+  ]
+}

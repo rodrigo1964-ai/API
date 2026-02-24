@@ -1,0 +1,14 @@
+{
+  "precision": 2,
+  "variables": [
+    {"nombre": "x", "tipo": "float", "domain": [1.0, 2.0],
+     "value": [1.0, 2.0]}
+  ],
+  "expresiones": [
+    "x",
+    "x * x",
+    "x * x - x",
+    "2 * x + 3",
+    "(x - 1.5) * (x - 1.5)"
+  ]
+}

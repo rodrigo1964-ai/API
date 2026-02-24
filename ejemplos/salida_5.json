@@ -1,0 +1,27 @@
+{
+	"archivo_entrada":	"ejemplos/entrada_5.json",
+	"precision":	0,
+	"factor":	1,
+	"variables":	[{
+			"nombre":	"x",
+			"tipo":	"integer",
+			"dominio":	[1, 10],
+			"valor":	[2, 5, 8]
+		}],
+	"expresiones":	[{
+			"expresion":	"x * 2",
+			"resultado":	[4, 10, 16]
+		}, {
+			"expresion":	"x + 10",
+			"resultado":	[12, 15, 18]
+		}, {
+			"expresion":	"x > 5",
+			"resultado":	[false, false, true]
+		}],
+	"resumen":	{
+		"total_variables":	1,
+		"total_expresiones":	3,
+		"errores":	0,
+		"valido":	true
+	}
+}

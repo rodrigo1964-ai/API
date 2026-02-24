@@ -1,0 +1,27 @@
+{
+  "precision": 0,
+  "variables": [
+    {"nombre": "x", "tipo": "integer", "domain": [1, 100], "value": [10, 20, 30]},
+    {"nombre": "y", "tipo": "integer", "domain": [1, 50], "value": [5, 15]},
+    {"nombre": "z", "tipo": "integer", "domain": [0, 200], "value": [25, 50, 75, 100]},
+    {"nombre": "a", "tipo": "integer", "domain": [-10, 10], "value": [-5, 0, 5]},
+    {"nombre": "b", "tipo": "integer", "domain": [1, 20], "value": [2, 4, 8]}
+  ],
+  "expresiones": [
+    "x",
+    "x + y",
+    "x - y",
+    "x * y",
+    "x + y + z",
+    "x * y + z",
+    "x - y * 2",
+    "(x + y) * a",
+    "x / 5 + y",
+    "abs(a)",
+    "sqr(y)",
+    "x > y",
+    "z >= 50",
+    "(x + y) <= z",
+    "x * b - y * a"
+  ]
+}

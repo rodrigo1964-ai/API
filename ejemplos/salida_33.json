@@ -1,0 +1,34 @@
+{
+	"archivo_entrada":	"ejemplos/entrada_33.json",
+	"precision":	0,
+	"factor":	1,
+	"variables":	[{
+			"nombre":	"modulos",
+			"tipo":	"set",
+			"dominio":	[0, 0],
+			"valor":	["auth", "payment"]
+		}, {
+			"nombre":	"version",
+			"tipo":	"integer",
+			"dominio":	[1, 10],
+			"valor":	5
+		}, {
+			"nombre":	"estable",
+			"tipo":	"logic",
+			"dominio":	[true, false],
+			"valor":	true
+		}],
+	"expresiones":	[{
+			"expresion":	"version >= 3",
+			"resultado":	true
+		}, {
+			"expresion":	"estable = true",
+			"resultado":	true
+		}],
+	"resumen":	{
+		"total_variables":	3,
+		"total_expresiones":	4,
+		"errores":	0,
+		"valido":	true
+	}
+}

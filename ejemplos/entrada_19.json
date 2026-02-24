@@ -1,0 +1,11 @@
+{
+  "precision": 0,
+  "variables": [
+    {"nombre": "precio", "tipo": "integer", "domain": [1, 1000], "value": [100, 200, 300]},
+    {"nombre": "descuento", "tipo": "integer", "domain": [0, 100], "value": 20}
+  ],
+  "expresiones": [
+    "precio - descuento",
+    "precio > 150"
+  ]
+}

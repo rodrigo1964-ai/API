@@ -1,0 +1,34 @@
+(* Operaciones de Conjuntos - Ejemplo Completo *)
+
+precision: 0;
+
+variables: {
+    equipo      : set : {"Roles": ["dev","qa","pm","dba"]} : ["dev", "qa"];
+    admin       : set : {"Admin": ["root","super","admin"]} : ["admin"];
+    codigo      : integer : [1, 100] : 42;
+}
+
+expresiones: {
+    (* Cardinality *)
+    CARDINALITY(equipo);
+    CARDINALITY({alice,bob,charlie,diana});
+
+    (* Membership - IN *)
+    codigo IN {10,20,30,40,42,50};
+
+    (*  Union de conjuntos *)
+    equipo UNION {pm,dba};
+
+    (* Intersección *)
+    equipo INTERSECT {dev,qa,admin};
+
+    (* Diferencia *)
+    equipo DIFFERENCE {qa};
+
+    (* Subset *)
+    {dev} SUBSET equipo;
+    {dev,admin} SUBSET equipo;
+}
+
+funciones: {
+}

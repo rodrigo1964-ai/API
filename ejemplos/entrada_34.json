@@ -1,0 +1,14 @@
+{
+  "precision": 1,
+  "variables": [
+    {"nombre": "etapas", "tipo": "set", "domain": ["design","dev","test","deploy","maint"], "value": ["design", "dev", "test"]},
+    {"nombre": "progreso", "tipo": "integer", "domain": [0, 100], "value": [60, 75]},
+    {"nombre": "aprobado", "tipo": "logic", "domain": [true, false], "value": [true, false]}
+  ],
+  "expresiones": [
+    "progreso >= 50",
+    "CARDINALITY(etapas) >= 3",
+    "{design,dev} SUBSET etapas",
+    "etapas INTERSECT {test,deploy}"
+  ]
+}

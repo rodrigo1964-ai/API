@@ -1,0 +1,14 @@
+{
+  "precision": 0,
+  "variables": [
+    {"nombre": "turnos", "tipo": "set", "domain": ["manana","tarde","noche","madrugada"], "value": ["manana", "tarde"]},
+    {"nombre": "personal", "tipo": "integer", "domain": [5, 50], "value": [15, 20]},
+    {"nombre": "completo", "tipo": "logic", "domain": [true, false], "value": true}
+  ],
+  "expresiones": [
+    "personal >= 10",
+    "{manana,tarde} SUBSET turnos",
+    "CARDINALITY(turnos) = 2",
+    "completo = true"
+  ]
+}

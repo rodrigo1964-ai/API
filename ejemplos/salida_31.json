@@ -1,0 +1,37 @@
+{
+	"archivo_entrada":	"ejemplos/entrada_31.json",
+	"precision":	0,
+	"factor":	1,
+	"variables":	[{
+			"nombre":	"vehiculos",
+			"tipo":	"set",
+			"dominio":	[0, 0],
+			"valor":	["auto", "moto"]
+		}, {
+			"nombre":	"pasajeros",
+			"tipo":	"integer",
+			"dominio":	[1, 50],
+			"valor":	[2, 4]
+		}, {
+			"nombre":	"operativo",
+			"tipo":	"logic",
+			"dominio":	[true, false],
+			"valor":	true
+		}],
+	"expresiones":	[{
+			"expresion":	"operativo = true",
+			"resultado":	true
+		}, {
+			"expresion":	"pasajeros <= 5",
+			"resultado":	[true, true]
+		}, {
+			"expresion":	"vehiculos DIFFERENCE {camion,bus}",
+			"resultado":	["auto", "moto"]
+		}],
+	"resumen":	{
+		"total_variables":	3,
+		"total_expresiones":	4,
+		"errores":	0,
+		"valido":	true
+	}
+}

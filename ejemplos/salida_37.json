@@ -1,0 +1,34 @@
+{
+	"archivo_entrada":	"ejemplos/entrada_37.json",
+	"precision":	0,
+	"factor":	1,
+	"variables":	[{
+			"nombre":	"turnos",
+			"tipo":	"set",
+			"dominio":	[0, 0],
+			"valor":	["manana", "tarde"]
+		}, {
+			"nombre":	"personal",
+			"tipo":	"integer",
+			"dominio":	[5, 50],
+			"valor":	[15, 20]
+		}, {
+			"nombre":	"completo",
+			"tipo":	"logic",
+			"dominio":	[true, false],
+			"valor":	true
+		}],
+	"expresiones":	[{
+			"expresion":	"personal >= 10",
+			"resultado":	[true, true]
+		}, {
+			"expresion":	"completo = true",
+			"resultado":	true
+		}],
+	"resumen":	{
+		"total_variables":	3,
+		"total_expresiones":	4,
+		"errores":	0,
+		"valido":	true
+	}
+}

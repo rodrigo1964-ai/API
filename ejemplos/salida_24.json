@@ -1,0 +1,45 @@
+{
+	"archivo_entrada":	"ejemplos/entrada_24.json",
+	"precision":	2,
+	"factor":	100,
+	"variables":	[{
+			"nombre":	"servicios",
+			"tipo":	"set",
+			"dominio":	[0, 0],
+			"valor":	["https", "ssh"]
+		}, {
+			"nombre":	"puertos_activos",
+			"tipo":	"integer",
+			"dominio":	[0, 100],
+			"valor":	[10, 15, 20]
+		}, {
+			"nombre":	"latencia",
+			"tipo":	"float",
+			"dominio":	[0, 100],
+			"valor":	[5.5, 10.19]
+		}, {
+			"nombre":	"conectado",
+			"tipo":	"logic",
+			"dominio":	[true, false],
+			"valor":	true
+		}],
+	"expresiones":	[{
+			"expresion":	"conectado = true",
+			"resultado":	true
+		}, {
+			"expresion":	"latencia < 20.0",
+			"resultado":	[true, true]
+		}, {
+			"expresion":	"puertos_activos <= 25",
+			"resultado":	[false, false, false]
+		}, {
+			"expresion":	"servicios INTERSECT {https,ssh} <> {}",
+			"resultado":	["https", "ssh"]
+		}],
+	"resumen":	{
+		"total_variables":	4,
+		"total_expresiones":	4,
+		"errores":	0,
+		"valido":	true
+	}
+}

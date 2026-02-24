@@ -1,0 +1,32 @@
+{
+	"archivo_entrada":	"ejemplos/entrada_2.json",
+	"precision":	2,
+	"factor":	100,
+	"variables":	[{
+			"nombre":	"x",
+			"tipo":	"float",
+			"dominio":	[0, 100],
+			"valor":	12.75
+		}, {
+			"nombre":	"y",
+			"tipo":	"float",
+			"dominio":	[0, 100],
+			"valor":	8.25
+		}],
+	"expresiones":	[{
+			"expresion":	"x + y",
+			"resultado":	21
+		}, {
+			"expresion":	"x * y",
+			"resultado":	10518.75
+		}, {
+			"expresion":	"x / y",
+			"resultado":	0.01
+		}],
+	"resumen":	{
+		"total_variables":	2,
+		"total_expresiones":	3,
+		"errores":	0,
+		"valido":	true
+	}
+}

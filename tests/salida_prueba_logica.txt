@@ -1,0 +1,143 @@
+Bridge GeCode - Validador JSON
+====================================
+
+=== PRECISION: 0 decimales (factor=1) ===
+
+=== VARIABLES ===
+  [0] activo : logic dom={0,1} val=[incert. 2 vals]
+  [1] validado : logic dom={0,1} val=[incert. 2 vals]
+  [2] autorizado : logic dom={0,1} val=[incert. 2 vals]
+  [3] conectado : logic dom={0,1} val=[incert. 2 vals]
+  [4] nivel : integer dom=[1..10] val=[incert. 2 vals]
+  [5] intentos : integer dom=[0..5] val=[incert. 3 vals]
+
+=== EXPRESIONES ===
+  Expr #1: activo
+    IDENT(activo)
+  Evaluando...
+  => [true, false] (2 valores)
+
+  Expr #2: activo AND validado
+    [AND]
+      IDENT(activo)
+      IDENT(validado)
+  Evaluando...
+  => [true, false, false, false] (4 valores)
+
+  Expr #3: activo OR validado
+    [OR]
+      IDENT(activo)
+      IDENT(validado)
+  Evaluando...
+  => [true, true, true, false] (4 valores)
+
+  Expr #4: NOT activo
+    [NOT]
+      IDENT(activo)
+  Evaluando...
+  => [false, true] (2 valores)
+
+  Expr #5: activo AND NOT validado
+    [AND]
+      IDENT(activo)
+      [NOT]
+        IDENT(validado)
+  Evaluando...
+  => [false, true, false, false] (4 valores)
+
+  Expr #6: activo OR validado OR autorizado
+    [OR]
+      [OR]
+        IDENT(activo)
+        IDENT(validado)
+      IDENT(autorizado)
+  Evaluando...
+  => [true, true, true, true, true, true, true, false] (8 valores)
+
+  Expr #7: activo AND validado AND autorizado
+    [AND]
+      [AND]
+        IDENT(activo)
+        IDENT(validado)
+      IDENT(autorizado)
+  Evaluando...
+  => [true, false, false, false, false, false, false, false] (8 valores)
+
+  Expr #8: (activo OR validado) AND conectado
+    [AND]
+      [OR]
+        IDENT(activo)
+        IDENT(validado)
+      IDENT(conectado)
+  Evaluando...
+  => [true, false, true, false, true, false, false, false] (8 valores)
+
+  Expr #9: activo IMPLICA validado
+    [IMPLICA]
+      IDENT(activo)
+      IDENT(validado)
+  Evaluando...
+  => [true, false, true, true] (4 valores)
+
+  Expr #10: NOT(activo AND validado)
+    [NOT]
+      [AND]
+        IDENT(activo)
+        IDENT(validado)
+  Evaluando...
+  => [false, true, true, true] (4 valores)
+
+  Expr #11: nivel > 5
+    [>]
+      IDENT(nivel)
+      ENTERO(5)
+  Evaluando...
+  => [false, true] (2 valores)
+
+  Expr #12: intentos < 4
+    [<]
+      IDENT(intentos)
+      ENTERO(4)
+  Evaluando...
+  => [true, true, false] (3 valores)
+
+  Expr #13: activo AND (nivel > 5)
+    [AND]
+      IDENT(activo)
+      [>]
+        IDENT(nivel)
+        ENTERO(5)
+  Evaluando...
+  => [false, true, false, false] (4 valores)
+
+  Expr #14: (validado OR autorizado) AND (intentos <= 3)
+    [AND]
+      [OR]
+        IDENT(validado)
+        IDENT(autorizado)
+      [<=]
+        IDENT(intentos)
+        ENTERO(3)
+  Evaluando...
+  => [true, true, false, true, true, false, true, true, false, false, ...] (12 valores)
+
+  Expr #15: (activo AND conectado) IMPLICA (validado AND autorizado)
+    [IMPLICA]
+      [AND]
+        IDENT(activo)
+        IDENT(conectado)
+      [AND]
+        IDENT(validado)
+        IDENT(autorizado)
+  Evaluando...
+  => [true, false, false, false, true, true, true, true, true, true, ...] (16 valores)
+
+========================================
+RESUMEN
+========================================
+  Variables: 6 (int:2 float:0 logic:4 set:0)
+  Expresiones: 15
+  Funciones:   0
+  Errores: 0
+
+  >>> JSON VALIDO - listo para el Bridge <<<

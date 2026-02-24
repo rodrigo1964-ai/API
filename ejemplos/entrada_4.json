@@ -1,0 +1,12 @@
+{
+  "precision": 1,
+  "variables": [
+    {"nombre": "temperatura", "tipo": "float", "domain": [0.0, 50.0], "value": 22.5},
+    {"nombre": "umbral", "tipo": "float", "domain": [0.0, 50.0], "value": 20.0}
+  ],
+  "expresiones": [
+    "temperatura > umbral",
+    "temperatura >= 20.0",
+    "temperatura <= 25.0"
+  ]
+}

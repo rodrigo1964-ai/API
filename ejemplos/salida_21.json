@@ -1,0 +1,23 @@
+{
+	"archivo_entrada":	"ejemplos/entrada_21.json",
+	"precision":	0,
+	"factor":	1,
+	"variables":	[{
+			"nombre":	"equipo",
+			"tipo":	"set",
+			"dominio":	[0, 0],
+			"valor":	["dev", "qa"]
+		}, {
+			"nombre":	"administradores",
+			"tipo":	"set",
+			"dominio":	[0, 0],
+			"valor":	["admin"]
+		}],
+	"expresiones":	[],
+	"resumen":	{
+		"total_variables":	2,
+		"total_expresiones":	2,
+		"errores":	0,
+		"valido":	true
+	}
+}

@@ -1,0 +1,29 @@
+{
+  "precision": 0,
+  "variables": [
+    {"nombre": "activo", "tipo": "logic", "domain": [true, false], "value": [true, false]},
+    {"nombre": "validado", "tipo": "logic", "domain": [true, false], "value": [true, false]},
+    {"nombre": "autorizado", "tipo": "logic", "domain": [true, false], "value": [true, false]},
+    {"nombre": "A", "tipo": "set", "domain": ["a","b","c","d"], "value": ["a","b"]},
+    {"nombre": "B", "tipo": "set", "domain": ["b","c","d","e"], "value": ["b","c"]},
+    {"nombre": "permisos", "tipo": "set", "domain": ["read","write","execute"], "value": ["read","write"]},
+    {"nombre": "nivel", "tipo": "integer", "domain": [1, 10], "value": [2, 5, 8]}
+  ],
+  "expresiones": [
+    "((activo AND validado) OR (autorizado AND (CARDINALITY(A) > 1)))",
+    "((CARDINALITY(A UNION B) >= 3) AND (activo OR validado))",
+    "(({b} SUBSET A) AND ({c} SUBSET B)) OR (NOT activo)",
+    "((activo IMPLICA validado) AND (CARDINALITY(permisos) >= 2))",
+    "(((CARDINALITY(A) + CARDINALITY(B)) > 2) AND (activo AND autorizado))",
+    "((activo OR validado) AND ((nivel > 3) OR ({write} SUBSET permisos)))",
+    "(((A INTERSECT B) = {b}) IMPLICA (activo AND validado))",
+    "((CARDINALITY(A UNION B) <= 5) AND ((activo AND validado) OR autorizado))",
+    "(({a} SUBSET A) AND ({read} SUBSET permisos)) AND (validado OR (nivel >= 5))",
+    "((NOT activo) OR ((CARDINALITY(permisos) >= 2) AND autorizado))",
+    "(((CARDINALITY(A) * nivel) > 10) AND (activo OR validado))",
+    "((activo AND (CARDINALITY(B) >= 2)) OR ((nivel > 5) AND autorizado))",
+    "(({b,c} SUBSET (A UNION B)) AND ((activo AND validado) IMPLICA autorizado))",
+    "((CARDINALITY(permisos) + nivel) >= 5) AND ((activo OR validado) AND (NOT autorizado))",
+    "(((A DIFFERENCE B) = {a}) AND (activo IMPLICA (validado AND (nivel >= 2))))"
+  ]
+}

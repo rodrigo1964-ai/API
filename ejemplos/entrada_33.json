@@ -1,0 +1,14 @@
+{
+  "precision": 0,
+  "variables": [
+    {"nombre": "modulos", "tipo": "set", "domain": ["auth","payment","shipping","notify"], "value": ["auth", "payment"]},
+    {"nombre": "version", "tipo": "integer", "domain": [1, 10], "value": 5},
+    {"nombre": "estable", "tipo": "logic", "domain": [true, false], "value": true}
+  ],
+  "expresiones": [
+    "version >= 3",
+    "estable = true",
+    "{auth,payment} SUBSET modulos",
+    "CARDINALITY(modulos UNION {notify}) <= 4"
+  ]
+}

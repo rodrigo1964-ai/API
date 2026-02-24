@@ -1,0 +1,31 @@
+{
+	"archivo_entrada":	"ejemplos/entrada_18.json",
+	"precision":	1,
+	"factor":	10,
+	"variables":	[{
+			"nombre":	"condicion1",
+			"tipo":	"logic",
+			"dominio":	[true, false],
+			"valor":	true
+		}, {
+			"nombre":	"condicion2",
+			"tipo":	"logic",
+			"dominio":	[true, false],
+			"valor":	true
+		}, {
+			"nombre":	"resultado",
+			"tipo":	"integer",
+			"dominio":	[0, 100],
+			"valor":	42
+		}],
+	"expresiones":	[{
+			"expresion":	"condicion1 AND condicion2",
+			"resultado":	true
+		}],
+	"resumen":	{
+		"total_variables":	3,
+		"total_expresiones":	1,
+		"errores":	0,
+		"valido":	true
+	}
+}

@@ -1,0 +1,14 @@
+{
+  "precision": 0,
+  "variables": [
+    {"nombre": "dias", "tipo": "set", "domain": ["lun","mar","mie","jue","vie","sab","dom"], "value": ["lun", "mar", "mie", "jue", "vie"]},
+    {"nombre": "horas", "tipo": "integer", "domain": [1, 24], "value": 8},
+    {"nombre": "turno_completo", "tipo": "logic", "domain": [true, false], "value": true}
+  ],
+  "expresiones": [
+    "horas >= 6",
+    "{lun,mar,mie,jue,vie} SUBSET dias",
+    "CARDINALITY(dias) = 5",
+    "turno_completo = true"
+  ]
+}

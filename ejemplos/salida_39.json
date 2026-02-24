@@ -1,0 +1,34 @@
+{
+	"archivo_entrada":	"ejemplos/entrada_39.json",
+	"precision":	0,
+	"factor":	1,
+	"variables":	[{
+			"nombre":	"herramientas",
+			"tipo":	"set",
+			"dominio":	[0, 0],
+			"valor":	["git", "docker", "jenkins"]
+		}, {
+			"nombre":	"experiencia_meses",
+			"tipo":	"integer",
+			"dominio":	[0, 120],
+			"valor":	[18, 24, 36]
+		}, {
+			"nombre":	"productivo",
+			"tipo":	"logic",
+			"dominio":	[true, false],
+			"valor":	true
+		}],
+	"expresiones":	[{
+			"expresion":	"experiencia_meses >= 12",
+			"resultado":	[true, true, true]
+		}, {
+			"expresion":	"productivo = true",
+			"resultado":	true
+		}],
+	"resumen":	{
+		"total_variables":	3,
+		"total_expresiones":	4,
+		"errores":	0,
+		"valido":	true
+	}
+}

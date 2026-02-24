@@ -1,0 +1,12 @@
+{
+  "precision": 1,
+  "variables": [
+    {"nombre": "activo", "tipo": "logic", "domain": [true, false], "value": true},
+    {"nombre": "bloqueado", "tipo": "logic", "domain": [true, false], "value": false}
+  ],
+  "expresiones": [
+    "activo AND bloqueado",
+    "activo OR bloqueado",
+    "NOT activo"
+  ]
+}

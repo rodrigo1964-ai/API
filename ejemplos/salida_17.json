@@ -1,0 +1,31 @@
+{
+	"archivo_entrada":	"ejemplos/entrada_17.json",
+	"precision":	0,
+	"factor":	1,
+	"variables":	[{
+			"nombre":	"n1",
+			"tipo":	"integer",
+			"dominio":	[0, 100],
+			"valor":	5
+		}, {
+			"nombre":	"n2",
+			"tipo":	"integer",
+			"dominio":	[0, 100],
+			"valor":	10
+		}, {
+			"nombre":	"n3",
+			"tipo":	"integer",
+			"dominio":	[0, 100],
+			"valor":	15
+		}],
+	"expresiones":	[{
+			"expresion":	"(n1 + n2 + n3) / 3",
+			"resultado":	10
+		}],
+	"resumen":	{
+		"total_variables":	3,
+		"total_expresiones":	1,
+		"errores":	0,
+		"valido":	true
+	}
+}

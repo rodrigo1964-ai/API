@@ -1,0 +1,59 @@
+Bridge GeCode - Validador JSON
+====================================
+
+=== PRECISION: 2 decimales (factor=100) ===
+
+=== VARIABLES ===
+  [0] x : float dom=[100..200] val=[incert. 2 vals]
+
+=== EXPRESIONES ===
+  Expr #1: x
+    IDENT(x)
+  Evaluando...
+  => [1.000, 2.000] (2 valores)
+
+  Expr #2: x * x
+    [*]
+      IDENT(x)
+      IDENT(x)
+  Evaluando...
+  => [100.000, 200.000, 200.000, 400.000] (4 valores)
+
+  Expr #3: x * x - x
+    [-]
+      [*]
+        IDENT(x)
+        IDENT(x)
+      IDENT(x)
+  Evaluando...
+  => [99.000, 98.000, 199.000, 198.000, 199.000, 198.000, 399.000, 398.000] (8 valores)
+
+  Expr #4: 2 * x + 3
+    [+]
+      [*]
+        ENTERO(2 = 0.020)
+        IDENT(x)
+      ENTERO(3 = 0.030)
+  Evaluando...
+  => [2.030, 4.030] (2 valores)
+
+  Expr #5: (x - 1.5) * (x - 1.5)
+    [*]
+      [-]
+        IDENT(x)
+        ENTERO(150 = 1.500)
+      [-]
+        IDENT(x)
+        ENTERO(150 = 1.500)
+  Evaluando...
+  => [25.000, -25.000, -25.000, 25.000] (4 valores)
+
+========================================
+RESUMEN
+========================================
+  Variables: 1 (int:0 float:1 logic:0 set:0)
+  Expresiones: 5
+  Funciones:   0
+  Errores: 0
+
+  >>> JSON VALIDO - listo para el Bridge <<<

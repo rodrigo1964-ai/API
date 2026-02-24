@@ -1,0 +1,29 @@
+{
+	"archivo_entrada":	"ejemplos/entrada_9.json",
+	"precision":	0,
+	"factor":	1,
+	"variables":	[{
+			"nombre":	"p",
+			"tipo":	"logic",
+			"dominio":	[true, false],
+			"valor":	true
+		}, {
+			"nombre":	"q",
+			"tipo":	"logic",
+			"dominio":	[true, false],
+			"valor":	false
+		}],
+	"expresiones":	[{
+			"expresion":	"p IMPLICA q",
+			"resultado":	false
+		}, {
+			"expresion":	"NOT p OR q",
+			"resultado":	false
+		}],
+	"resumen":	{
+		"total_variables":	2,
+		"total_expresiones":	2,
+		"errores":	0,
+		"valido":	true
+	}
+}

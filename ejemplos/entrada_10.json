@@ -1,0 +1,13 @@
+{
+  "precision": 1,
+  "variables": [
+    {"nombre": "x", "tipo": "integer", "domain": [1, 20], "value": 10},
+    {"nombre": "y", "tipo": "integer", "domain": [1, 20], "value": 5},
+    {"nombre": "z", "tipo": "integer", "domain": [1, 20], "value": 3}
+  ],
+  "expresiones": [
+    "(x + y) * z",
+    "x + (y * z)",
+    "x * y + z"
+  ]
+}

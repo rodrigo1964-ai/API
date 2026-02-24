@@ -1,0 +1,13 @@
+{
+  "precision": 1,
+  "variables": [
+    {"nombre": "temperatura", "tipo": "float", "domain": [0.0, 100.0], "value": 25.5},
+    {"nombre": "presion", "tipo": "integer", "domain": [1, 10], "value": [3, 5, 7]},
+    {"nombre": "activo", "tipo": "logic", "domain": [true, false], "value": true}
+  ],
+  "expresiones": [
+    "temperatura > 20.0",
+    "presion * 2",
+    "activo AND temperatura > 15.0"
+  ]
+}

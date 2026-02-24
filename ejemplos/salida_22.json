@@ -1,0 +1,39 @@
+{
+	"archivo_entrada":	"ejemplos/entrada_22.json",
+	"precision":	0,
+	"factor":	1,
+	"variables":	[{
+			"nombre":	"equipoActual",
+			"tipo":	"set",
+			"dominio":	[0, 0],
+			"valor":	["dev", "qa"]
+		}, {
+			"nombre":	"equipoNecesario",
+			"tipo":	"set",
+			"dominio":	[0, 0],
+			"valor":	["qa", "pm", "ops"]
+		}, {
+			"nombre":	"presupuesto",
+			"tipo":	"integer",
+			"dominio":	[1000, 50000],
+			"valor":	25000
+		}, {
+			"nombre":	"activo",
+			"tipo":	"logic",
+			"dominio":	[true, false],
+			"valor":	true
+		}],
+	"expresiones":	[{
+			"expresion":	"activo = true",
+			"resultado":	true
+		}, {
+			"expresion":	"presupuesto > 20000",
+			"resultado":	true
+		}],
+	"resumen":	{
+		"total_variables":	4,
+		"total_expresiones":	4,
+		"errores":	0,
+		"valido":	true
+	}
+}

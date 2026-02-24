@@ -1,0 +1,21 @@
+{
+	"archivo_entrada":	"test_malla_auto.json",
+	"precision":	1,
+	"factor":	10,
+	"variables":	[{
+			"nombre":	"x",
+			"tipo":	"float",
+			"dominio":	[1, 2],
+			"valor":	[1.1, 1.5]
+		}],
+	"expresiones":	[{
+			"expresion":	"2 * x",
+			"resultado":	[2.2, 3]
+		}],
+	"resumen":	{
+		"total_variables":	1,
+		"total_expresiones":	1,
+		"errores":	0,
+		"valido":	true
+	}
+}

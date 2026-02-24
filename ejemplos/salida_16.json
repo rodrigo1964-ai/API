@@ -1,0 +1,29 @@
+{
+	"archivo_entrada":	"ejemplos/entrada_16.json",
+	"precision":	0,
+	"factor":	1,
+	"variables":	[{
+			"nombre":	"x",
+			"tipo":	"integer",
+			"dominio":	[1, 100],
+			"valor":	5
+		}, {
+			"nombre":	"y",
+			"tipo":	"integer",
+			"dominio":	[1, 100],
+			"valor":	10
+		}],
+	"expresiones":	[{
+			"expresion":	"abs(x - y)",
+			"resultado":	5
+		}, {
+			"expresion":	"abs(y - x)",
+			"resultado":	5
+		}],
+	"resumen":	{
+		"total_variables":	2,
+		"total_expresiones":	2,
+		"errores":	0,
+		"valido":	true
+	}
+}

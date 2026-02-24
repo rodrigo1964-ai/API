@@ -1,0 +1,22 @@
+(* Test de operaciones de conjuntos *)
+
+precision: 0;
+
+variables: {
+    equipo : set : {"Roles": ["dev","qa","pm","dba"]} : ["dev", "qa"];
+}
+
+expresiones: {
+    equipo UNION {pm};
+    equipo INTERSECT {dev, qa, admin};
+    equipo DIFFERENCE {qa};
+    dev IN equipo;
+    admin IN equipo;
+    {dev, qa} SUBSET equipo;
+    {dev, admin} SUBSET equipo;
+    CARDINALITY(equipo);
+    CARDINALITY({a,b,c,d,e});
+}
+
+funciones: {
+}

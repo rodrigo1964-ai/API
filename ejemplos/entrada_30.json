@@ -1,0 +1,14 @@
+{
+  "precision": 1,
+  "variables": [
+    {"nombre": "idiomas", "tipo": "set", "domain": ["esp","eng","fra","deu","ita"], "value": ["esp", "eng"]},
+    {"nombre": "experiencia", "tipo": "integer", "domain": [0, 20], "value": [3, 5, 7]},
+    {"nombre": "certificado", "tipo": "logic", "domain": [true, false], "value": [true, false]}
+  ],
+  "expresiones": [
+    "experiencia >= 3",
+    "{esp,eng} SUBSET idiomas",
+    "CARDINALITY(idiomas) >= 2",
+    "certificado = true"
+  ]
+}

@@ -1,0 +1,21 @@
+{
+	"archivo_entrada":	"ejemplos/entrada_11.json",
+	"precision":	1,
+	"factor":	10,
+	"variables":	[{
+			"nombre":	"a",
+			"tipo":	"integer",
+			"dominio":	[1, 100],
+			"valor":	16
+		}],
+	"expresiones":	[{
+			"expresion":	"sqrt(a)",
+			"resultado":	4
+		}],
+	"resumen":	{
+		"total_variables":	1,
+		"total_expresiones":	1,
+		"errores":	0,
+		"valido":	true
+	}
+}

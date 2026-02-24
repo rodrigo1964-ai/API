@@ -1,0 +1,34 @@
+{
+	"archivo_entrada":	"ejemplos/entrada_34.json",
+	"precision":	1,
+	"factor":	10,
+	"variables":	[{
+			"nombre":	"etapas",
+			"tipo":	"set",
+			"dominio":	[0, 0],
+			"valor":	["design", "dev", "test"]
+		}, {
+			"nombre":	"progreso",
+			"tipo":	"integer",
+			"dominio":	[0, 100],
+			"valor":	[60, 75]
+		}, {
+			"nombre":	"aprobado",
+			"tipo":	"logic",
+			"dominio":	[true, false],
+			"valor":	[true, false]
+		}],
+	"expresiones":	[{
+			"expresion":	"progreso >= 50",
+			"resultado":	[true, true]
+		}, {
+			"expresion":	"etapas INTERSECT {test,deploy}",
+			"resultado":	["design", "dev", "test"]
+		}],
+	"resumen":	{
+		"total_variables":	3,
+		"total_expresiones":	4,
+		"errores":	0,
+		"valido":	true
+	}
+}

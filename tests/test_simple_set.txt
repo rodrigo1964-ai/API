@@ -1,0 +1,13 @@
+(* Test simple de conjuntos *)
+
+precision: 0;
+
+variables: {
+}
+
+expresiones: {
+    1 + 2;
+}
+
+funciones: {
+}

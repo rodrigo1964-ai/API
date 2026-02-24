@@ -1,0 +1,37 @@
+{
+	"archivo_entrada":	"ejemplos/entrada_29.json",
+	"precision":	0,
+	"factor":	1,
+	"variables":	[{
+			"nombre":	"productos",
+			"tipo":	"set",
+			"dominio":	[0, 0],
+			"valor":	["laptop", "mouse", "teclado"]
+		}, {
+			"nombre":	"stock",
+			"tipo":	"integer",
+			"dominio":	[0, 1000],
+			"valor":	[50, 100]
+		}, {
+			"nombre":	"disponible",
+			"tipo":	"logic",
+			"dominio":	[true, false],
+			"valor":	true
+		}],
+	"expresiones":	[{
+			"expresion":	"disponible = true",
+			"resultado":	true
+		}, {
+			"expresion":	"stock > 0",
+			"resultado":	[true, true]
+		}, {
+			"expresion":	"productos INTERSECT {laptop,monitor}",
+			"resultado":	["laptop", "mouse", "teclado"]
+		}],
+	"resumen":	{
+		"total_variables":	3,
+		"total_expresiones":	4,
+		"errores":	0,
+		"valido":	true
+	}
+}

@@ -1,0 +1,26 @@
+{
+  "precision": 2,
+  "variables": [
+    {"nombre": "x", "tipo": "float", "domain": [0.0, 10.0], "value": [1.0, 3.0]},
+    {"nombre": "y", "tipo": "float", "domain": [-5.0, 5.0], "value": [0.5, 2.5]},
+    {"nombre": "z", "tipo": "integer", "domain": [1, 100], "value": [10, 20]},
+    {"nombre": "w", "tipo": "float", "domain": [0.0, 100.0], "value": [5.0, 15.0]}
+  ],
+  "expresiones": [
+    "x",
+    "x + y",
+    "x - y",
+    "x * y",
+    "x * x",
+    "2 * x + 3",
+    "(x + y) * z",
+    "x * y + z * w",
+    "sqrt(x)",
+    "abs(x - y)",
+    "sqr(x) - sqr(y)",
+    "x / 2 + y / 2",
+    "(x + y) / (w - x)",
+    "sin(x) + cos(y)",
+    "exp(x) - ln(w)"
+  ]
+}

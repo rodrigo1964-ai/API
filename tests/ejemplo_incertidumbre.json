@@ -1,0 +1,13 @@
+{
+  "precision": 1,
+  "variables": [
+    {"nombre": "a", "tipo": "integer", "domain": [1, 10], "value": [2, 5, 8]},
+    {"nombre": "b", "tipo": "integer", "domain": [1, 10], "value": 3},
+    {"nombre": "valido", "tipo": "logic", "domain": [true, false], "value": [true, false]}
+  ],
+  "expresiones": [
+    "a + b",
+    "a > b",
+    "valido AND a > 3"
+  ]
+}
