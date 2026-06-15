@@ -1,6 +1,6 @@
 # Ejecutables
 server
-bin/bridge
+
 *.exe
 *.out
 
