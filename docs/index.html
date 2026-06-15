@@ -234,13 +234,14 @@
                 <div class="form-group">
                     <label>JSON Input:</label>
                     <textarea id="bison-input" placeholder='Ingresa el JSON...'>{
-  "precision": 2,
+  "precision": 1,
   "variables": [
-    {"name": "x", "type": "integer", "value": 10},
-    {"name": "y", "type": "float", "value": 3.14}
+    {"nombre": "x", "tipo": "integer", "domain": [1,100], "value": 10},
+    {"nombre": "y", "tipo": "integer", "domain": [1,100], "value": 5}
   ],
-  "expressions": [
-    {"name": "suma", "formula": "x + y"}
+  "expresiones": [
+    "x + y",
+    "x * y"
   ]
 }</textarea>
                 </div>
@@ -313,26 +314,20 @@
         const templates = {
             bison: {
                 basic: {
-                    precision: 2,
+                    precision: 1,
                     variables: [
-                        {name: "x", type: "integer", value: 10},
-                        {name: "y", type: "float", value: 3.14}
+                        {nombre: "x", tipo: "integer", domain: [1,100], value: 10},
+                        {nombre: "y", tipo: "integer", domain: [1,100], value: 5}
                     ],
-                    expressions: [
-                        {name: "suma", formula: "x + y"},
-                        {name: "producto", formula: "x * y"}
-                    ]
+                    expresiones: ["x + y", "x * y", "x - y"]
                 },
                 uncertainty: {
                     precision: 0,
                     variables: [
-                        {name: "x", type: "integer", value: [1, 2, 3]},
-                        {name: "y", type: "integer", value: [10, 20]}
+                        {nombre: "x", tipo: "integer", domain: [1,10], value: [1, 2, 3]},
+                        {nombre: "y", tipo: "integer", domain: [1,10], value: [10, 20]}
                     ],
-                    expressions: [
-                        {name: "suma", formula: "x + y"},
-                        {name: "comparacion", formula: "x > 2"}
-                    ]
+                    expresiones: ["x + y", "x * y"]
                 }
             }
         };

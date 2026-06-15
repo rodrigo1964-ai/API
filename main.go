@@ -170,7 +170,7 @@ func executeBridge(inputPath string) (interface{}, error) {
 	defer os.Remove(outputPath)
 
 	// Ejecutar: ./bin/bridge --json input.json -o output.json
-	cmd := exec.Command(bridgePath, "--json", inputPath, "-o", outputPath)
+	cmd := exec.Command(bridgePath, inputPath, outputPath)
 
 	var stderr bytes.Buffer
 	cmd.Stderr = &stderr
