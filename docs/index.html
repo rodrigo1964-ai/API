@@ -255,25 +255,35 @@
                 </div>
             </div>
 
-            <!-- Placeholder para otra API -->
+            <!-- Gecode CSP Solver API -->
             <div class="api-card">
                 <h2>
-                    Custom API #1
-                    <span class="api-status offline" id="status-custom1"></span>
+                    Gecode CSP Solver
+                    <span class="api-status checking" id="status-custom1"></span>
                 </h2>
-                <p>Configura tu propia API personalizada aquí.</p>
+                <p>Solver completo de Constraint Programming. Encuentra soluciones que satisfacen restricciones usando propagación AC-3, HC4 y búsqueda con backtracking (GeCode).</p>
 
                 <div class="form-group">
                     <label>API URL:</label>
-                    <input type="text" id="custom1-url" placeholder="https://api.ejemplo.com/endpoint">
+                    <input type="text" id="custom1-url" value="https://gecode-9exx.onrender.com/api/gecode">
                 </div>
 
                 <div class="form-group">
                     <label>JSON Input:</label>
-                    <textarea id="custom1-input" placeholder='{"key": "value"}'></textarea>
+                    <textarea id="custom1-input">{
+  "description": "Problema simple de variables booleanas",
+  "variables": [
+    {"name": "X", "type": "boolean", "domain": [true, false], "value": [false]},
+    {"name": "Y", "type": "boolean", "domain": [true, false], "value": [true]}
+  ],
+  "expressions": [
+    {"constraints": ["X = false"]},
+    {"constraints": ["Y = true"]}
+  ]
+}</textarea>
                 </div>
 
-                <button onclick="callAPI('custom1')" id="btn-custom1">🚀 Llamar API</button>
+                <button onclick="callAPI('custom1')" id="btn-custom1">🚀 Resolver CSP</button>
 
                 <div class="result-container" id="result-custom1">
                     <h3>Resultado:</h3>
@@ -437,10 +447,12 @@
         // Verificar estado al cargar
         window.addEventListener('load', () => {
             checkAPIStatus('bison');
+            checkAPIStatus('custom1');
 
             // Re-verificar cada 30 segundos
             setInterval(() => {
                 checkAPIStatus('bison');
+                checkAPIStatus('custom1');
             }, 30000);
         });
 
