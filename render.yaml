@@ -5,6 +5,6 @@ services:
     env: go
     region: oregon
     plan: free
-    buildCommand: "make && go build -o server main.go"
-    startCommand: "./server"
+    buildCommand: "./build.sh"
+    startCommand: "./app"
     healthCheckPath: /health
