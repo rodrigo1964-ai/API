@@ -310,7 +310,8 @@
   "modelo_json": {
     "fiebre": {"type": "boolean", "value": true},
     "tos": {"type": "boolean", "value": true},
-    "temperatura": {"type": "real", "value": 38.5}
+    "temperatura": {"type": "real", "value": 38.5},
+    "ecuaciones": ["fiebre AND tos", "temperatura > 38.0"]
   }
 }</textarea>
                 </div>
@@ -392,11 +393,16 @@
                     modelo_json: {
                         ana_positivo: {type: "boolean", value: true},
                         proteinuria: {type: "boolean", value: true},
+                        antifosfolipidos: {type: "boolean", value: false},
                         artralgia: {type: "boolean", value: true},
                         rash_cutaneo: {type: "boolean", value: true},
                         vsg: {type: "integer", value: 45},
                         factor_reumatoideo: {type: "real", value: 32.0},
-                        laboratorio_activos: {type: "set", values: ["anti_dna", "complemento_bajo"]}
+                        pcr_mg_l: {type: "real", value: 18.5},
+                        ecuaciones: [
+                            "ana_positivo AND (artralgia OR rash_cutaneo)",
+                            "ana_positivo AND proteinuria AND factor_reumatoideo > 20"
+                        ]
                     }
                 }, null, 2);
             } else if (apiName === 'octave') {
