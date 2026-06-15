@@ -291,25 +291,32 @@
                 </div>
             </div>
 
-            <!-- Placeholder para otra API -->
+            <!-- MiniOctave Matrix API -->
             <div class="api-card">
                 <h2>
-                    Custom API #2
-                    <span class="api-status offline" id="status-custom2"></span>
+                    MiniOctave API
+                    <span class="api-status checking" id="status-custom2"></span>
                 </h2>
-                <p>Agrega otra API para expandir tu hub.</p>
+                <p>Evaluador matricial estilo Octave/MATLAB. Soporta matrices, determinantes, inversas, autovalores y números complejos.</p>
 
                 <div class="form-group">
                     <label>API URL:</label>
-                    <input type="text" id="custom2-url" placeholder="https://api.ejemplo.com/endpoint">
+                    <input type="text" id="custom2-url" value="https://minioctave.onrender.com/api/octave">
                 </div>
 
                 <div class="form-group">
                     <label>JSON Input:</label>
-                    <textarea id="custom2-input" placeholder='{"key": "value"}'></textarea>
+                    <textarea id="custom2-input">{
+  "expression": "inv(A)*B + 2*A",
+  "variables": {
+    "A": [[1, 2], [3, 4]],
+    "B": [[2, 0], [1, 2]]
+  }
+}</textarea>
                 </div>
 
-                <button onclick="callAPI('custom2')" id="btn-custom2">🚀 Llamar API</button>
+                <button onclick="loadTemplate('octave')" class="template-btn">📋 Cargar plantilla det/eig</button>
+                <button onclick="callAPI('custom2')" id="btn-custom2">🚀 Calcular</button>
 
                 <div class="result-container" id="result-custom2">
                     <h3>Resultado:</h3>
@@ -347,6 +354,11 @@
             if (apiName === 'bison') {
                 document.getElementById('bison-input').value =
                     JSON.stringify(templates.bison.uncertainty, null, 2);
+            } else if (apiName === 'octave') {
+                document.getElementById('custom2-input').value = JSON.stringify({
+                    expression: "eig(A)",
+                    variables: { A: [[0, -1], [1, 0]] }
+                }, null, 2);
             }
         }
 
@@ -412,7 +424,8 @@
                 resultContent.textContent = `❌ Error de red:\n${error.message}`;
             } finally {
                 button.disabled = false;
-                button.textContent = '🚀 ' + (apiName === 'bison' ? 'Evaluar' : 'Llamar API');
+                const labels = { bison: 'Evaluar', custom1: 'Resolver CSP', custom2: 'Calcular' };
+                button.textContent = '🚀 ' + (labels[apiName] || 'Llamar API');
             }
         }
 
@@ -455,11 +468,13 @@
         window.addEventListener('load', () => {
             checkAPIStatus('bison');
             checkAPIStatus('custom1');
+            checkAPIStatus('custom2');
 
             // Re-verificar cada 30 segundos
             setInterval(() => {
                 checkAPIStatus('bison');
                 checkAPIStatus('custom1');
+                checkAPIStatus('custom2');
             }, 30000);
         });
 
