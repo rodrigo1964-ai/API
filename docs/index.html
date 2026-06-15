@@ -291,6 +291,39 @@
                 </div>
             </div>
 
+            <!-- MotorGoE Evaluation API -->
+            <div class="api-card">
+                <h2>
+                    MotorGoE API
+                    <span class="api-status checking" id="status-motorgoe"></span>
+                </h2>
+                <p>Motor de evaluación de expresiones lógicas/numéricas con 82 dominios (médico, industrial, IoT). Detecta tautologías, tablas de verdad y consistencia.</p>
+
+                <div class="form-group">
+                    <label>API URL:</label>
+                    <input type="text" id="motorgoe-url" value="https://motorgoe.onrender.com/api/eval">
+                </div>
+
+                <div class="form-group">
+                    <label>JSON Input:</label>
+                    <textarea id="motorgoe-input">{
+  "modelo_json": {
+    "fiebre": {"type": "boolean", "value": true},
+    "tos": {"type": "boolean", "value": true},
+    "temperatura": {"type": "real", "value": 38.5}
+  }
+}</textarea>
+                </div>
+
+                <button onclick="loadTemplate('motorgoe')" class="template-btn">📋 Cargar dominio autoinmune</button>
+                <button onclick="callAPI('motorgoe')" id="btn-motorgoe">🚀 Evaluar</button>
+
+                <div class="result-container" id="result-motorgoe">
+                    <h3>Resultado:</h3>
+                    <div class="result-content" id="result-content-motorgoe"></div>
+                </div>
+            </div>
+
             <!-- MiniOctave Matrix API -->
             <div class="api-card">
                 <h2>
@@ -354,6 +387,18 @@
             if (apiName === 'bison') {
                 document.getElementById('bison-input').value =
                     JSON.stringify(templates.bison.uncertainty, null, 2);
+            } else if (apiName === 'motorgoe') {
+                document.getElementById('motorgoe-input').value = JSON.stringify({
+                    modelo_json: {
+                        ana_positivo: {type: "boolean", value: true},
+                        proteinuria: {type: "boolean", value: true},
+                        artralgia: {type: "boolean", value: true},
+                        rash_cutaneo: {type: "boolean", value: true},
+                        vsg: {type: "integer", value: 45},
+                        factor_reumatoideo: {type: "real", value: 32.0},
+                        laboratorio_activos: {type: "set", values: ["anti_dna", "complemento_bajo"]}
+                    }
+                }, null, 2);
             } else if (apiName === 'octave') {
                 document.getElementById('custom2-input').value = JSON.stringify({
                     expression: "eig(A)",
@@ -424,7 +469,7 @@
                 resultContent.textContent = `❌ Error de red:\n${error.message}`;
             } finally {
                 button.disabled = false;
-                const labels = { bison: 'Evaluar', custom1: 'Resolver CSP', custom2: 'Calcular' };
+                const labels = { bison: 'Evaluar', custom1: 'Resolver CSP', motorgoe: 'Evaluar', custom2: 'Calcular' };
                 button.textContent = '🚀 ' + (labels[apiName] || 'Llamar API');
             }
         }
@@ -468,12 +513,14 @@
         window.addEventListener('load', () => {
             checkAPIStatus('bison');
             checkAPIStatus('custom1');
+            checkAPIStatus('motorgoe');
             checkAPIStatus('custom2');
 
             // Re-verificar cada 30 segundos
             setInterval(() => {
                 checkAPIStatus('bison');
                 checkAPIStatus('custom1');
+                checkAPIStatus('motorgoe');
                 checkAPIStatus('custom2');
             }, 30000);
         });
