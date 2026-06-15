@@ -416,7 +416,7 @@
             }
         }
 
-        // Verificar estado de APIs
+        // Verificar estado de APIs (timeout 40s para cold start de Render free tier)
         async function checkAPIStatus(apiName) {
             const urlInput = document.getElementById(`${apiName}-url`);
             const statusDot = document.getElementById(`status-${apiName}`);
@@ -429,10 +429,16 @@
 
             statusDot.className = 'api-status checking';
 
+            const controller = new AbortController();
+            const timer = setTimeout(() => controller.abort(), 40000); // 40s timeout
+
             try {
-                // Intentar hacer health check (asumiendo endpoint /health)
                 const healthUrl = url.replace(/\/api\/[^\/]+$/, '/health');
-                const response = await fetch(healthUrl, { method: 'GET' });
+                const response = await fetch(healthUrl, {
+                    method: 'GET',
+                    signal: controller.signal
+                });
+                clearTimeout(timer);
 
                 if (response.ok) {
                     statusDot.className = 'api-status online';
@@ -440,6 +446,7 @@
                     statusDot.className = 'api-status offline';
                 }
             } catch {
+                clearTimeout(timer);
                 statusDot.className = 'api-status offline';
             }
         }
