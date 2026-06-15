@@ -1,0 +1,10 @@
+# Configuración para Render.com
+services:
+  - type: web
+    name: gnubison-api
+    env: go
+    region: oregon
+    plan: free
+    buildCommand: "make && go build -o server main.go"
+    startCommand: "./server"
+    healthCheckPath: /health

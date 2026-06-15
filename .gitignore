@@ -1,57 +1,41 @@
-# Directorios de compilación
-bin/
+# Ejecutables
+server
+bin/bridge
+*.exe
+*.out
+
+# Objetos compilados
 obj/
-build/
-dist/
+*.o
+*.a
+*.so
 
-# Archivos temporales
-*.bak
-*~
-*.swp
-*.swo
-.#*
-\#*#
+# Go
+go.sum
 
-# Sistema operativo
-.DS_Store
-Thumbs.db
-desktop.ini
+# Archivos generados por Bison/Flex
+src/bridge_gecode.tab.c
+src/bridge_gecode.tab.h
+src/lex.yy.c
+src/y.tab.c
+src/y.tab.h
+
+# Temporales
+*.tmp
+*.log
+/tmp/
 
 # IDEs
 .vscode/
 .idea/
-*.sublime-*
-.project
-.classpath
-.settings/
+*.swp
+*.swo
+*~
 
-# C/C++
-*.o
-*.a
-*.so
-*.out
-*.exe
-*.dll
-*.dylib
-core
-.depend
-*.dSYM/
+# Sistema
+.DS_Store
+Thumbs.db
 
-# Bison/Flex generados
-*.tab.c
-*.tab.h
-*.yy.c
-lex.yy.c
-*.output
-
-# Logs
-*.log
-logs/
-
-# Documentación generada
-docs/pdf/
-
-# Archivos de configuración local
-*.local
+# Env
 .env
-config.local.*
+.env.local
