@@ -1,3 +1,54 @@
+/* ================================================================
+ * json_reader.c - Parser y evaluador de archivos JSON
+ * Proyecto: GNUBison - Bridge GeCode Validator
+ * ================================================================
+ *
+ * PROPÓSITO:
+ *   Parser de formato JSON para especificaciones de constraint programming.
+ *   Lee archivos JSON con variables, dominios, valores y expresiones, luego
+ *   delega el parsing de expresiones al parser recursivo (expr_parser.c)
+ *   y la evaluación al motor de cálculo (expr_eval.c).
+ *
+ * ARQUITECTURA:
+ *   Pipeline: JSON → Variables globales → AST → Evaluación → Resultados
+ *
+ *   1. Lectura de JSON (cJSON): Parsea el documento completo
+ *   2. Extracción de metadata: precision, variables, dominios
+ *   3. Parsing de expresiones: Delega a parse_expression()
+ *   4. Evaluación: Delega a evaluar_expresion()
+ *   5. Salida: Formato texto (debug) o JSON estructurado
+ *
+ * FORMATO JSON ENTRADA:
+ *   {
+ *     "precision": 2,                 // Decimales (factor=10^precision)
+ *     "variables": [
+ *       {
+ *         "nombre": "x",
+ *         "tipo": "integer|float|logic|set",
+ *         "domain": [min, max] | {miembros: ["A","B"]},
+ *         "value": valor | [val1, val2, ...] | null
+ *       }
+ *     ],
+ *     "expresiones": ["x + y", "A UNION B"]
+ *   }
+ *
+ * DECISIONES DE DISEÑO:
+ *   - Valores con incertidumbre: "value": [v1,v2,...] permite CSP con múltiples
+ *     valores posibles. El evaluador calcula todas las combinaciones.
+ *   - Factor de escala: Convierte floats a enteros (factor_global = 10^precision)
+ *     para evitar aritmética de punto flotante en el evaluador.
+ *   - Tabla de sets: reg_set() centraliza strings de conjuntos en set_tabla[]
+ *     para comparación por índice en vez de strcmp().
+ *   - Modo dual: json_output_mode controla salida texto (debug) vs JSON (producción).
+ *
+ * REFERENCIAS:
+ *   - cJSON: Parser JSON externo (MIT license)
+ *   - bridge_types.h: Definiciones de VarReg, TipoVar, MAX_VARS
+ *   - expr_parser.c: Parser recursivo descendente de expresiones
+ *   - expr_eval.c: Motor de evaluación con soporte de incertidumbre
+ *
+ * ================================================================ */
+
 #define _POSIX_C_SOURCE 200809L
 #include <stdio.h>
 #include <stdlib.h>

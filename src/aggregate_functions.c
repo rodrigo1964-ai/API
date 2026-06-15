@@ -1,3 +1,46 @@
+/* ================================================================
+ * aggregate_functions.c - Funciones de agregación estadística
+ * Proyecto: GNUBison - Bridge GeCode Validator
+ * ================================================================
+ *
+ * PROPÓSITO:
+ *   Biblioteca de funciones agregadas para procesar resultados de evaluación
+ *   con incertidumbre. Soporta operaciones numéricas (sum, avg, min, max,
+ *   median, variance, stdev), lógicas (all, any, none) y de conjuntos (count).
+ *
+ * ARQUITECTURA:
+ *   Tres familias de funciones:
+ *   1. Agregación numérica: arrays de double (valores con precisión)
+ *   2. Agregación entera: arrays de int (optimizada para enteros)
+ *   3. Agregación lógica/conjuntos: arrays de int/char*
+ *
+ * DECISIONES DE DISEÑO:
+ *   - Versiones separadas int/double: Evita conversión implícita y mejora
+ *     rendimiento para el caso común (enteros con factor_global).
+ *   - MEDIAN modifica el array: Requiere ordenamiento in-place (qsort).
+ *     Documentar que no es const.
+ *   - Null-safe: Todas las funciones verifican array==NULL antes de procesar.
+ *   - Retorno 0.0 en caso de error: Simplifica manejo en evaluador.
+ *
+ * USO TÍPICO:
+ *   // Evaluar expresión con incertidumbre
+ *   ResultadoEval *res = evaluar_expresion(ast);  // res->n_valores > 1
+ *
+ *   // Calcular estadísticas sobre resultados
+ *   double promedio = aggregate_avg_int(res->valores, res->n_valores);
+ *   double desv_std = aggregate_stdev_int(res->valores, res->n_valores);
+ *
+ * EXTENSIÓN FUTURA:
+ *   - Funciones agregadas para sets: UNION_ALL, INTERSECT_ALL
+ *   - Percentiles: p50, p90, p95
+ *   - Moda (valor más frecuente)
+ *
+ * REFERENCIAS:
+ *   - aggregate_functions.h: Declaraciones y documentación de API
+ *   - expr_eval.c: Consumidor principal (evaluar resultados con incertidumbre)
+ *
+ * ================================================================ */
+
 #include "aggregate_functions.h"
 #include <math.h>
 #include <stdlib.h>

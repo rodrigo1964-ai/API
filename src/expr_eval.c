@@ -1,3 +1,60 @@
+/* ================================================================
+ * expr_eval.c - Motor de evaluación de expresiones con incertidumbre
+ * Proyecto: GNUBison - Bridge GeCode Validator
+ * ================================================================
+ *
+ * PROPÓSITO:
+ *   Evaluador de expresiones que calcula resultados exactos para constraint
+ *   programming. Soporta propagación de incertidumbre: si una variable tiene
+ *   múltiples valores posibles, calcula todas las combinaciones resultantes.
+ *
+ * ARQUITECTURA:
+ *   Evaluación recursiva de AST con propagación de conjuntos de valores:
+ *
+ *   evaluar_expresion(AST) → ResultadoEval {valores[], n_valores, es_bool}
+ *
+ *   - Nodos hoja: Variables (valor fijo o array de incertidumbre), literales
+ *   - Nodos internos: Operadores (arit, comp, logic, sets) aplican función
+ *     sobre producto cartesiano de operandos
+ *
+ * PROPAGACIÓN DE INCERTIDUMBRE:
+ *   Ejemplo: x=[10,20], y=5
+ *   Evaluar "x + y":
+ *     - obtener_valor_variable("x") → {valores=[10,20], n=2}
+ *     - obtener_valor_variable("y") → {valores=[5], n=1}
+ *     - eval_op_arit(SUMA) → {valores=[15,25], n=2}
+ *
+ *   Complejidad: O(n_izq * n_der) por operador binario
+ *
+ * TIPOS DE RESULTADOS:
+ *   - Escalares: n_valores=1, es_bool=0 → entero único
+ *   - Booleanos: n_valores=1, es_bool=1 → true/false
+ *   - Incertidumbre: n_valores>1 → múltiples valores posibles
+ *   - Conjuntos: es_set=1, set_elementos[] → array de strings
+ *
+ * DECISIONES DE DISEÑO:
+ *   - Aritmetica entera: Todos los cálculos en int (factor_global escala floats)
+ *   - División por cero: Retorna 0 (sin exception)
+ *   - Funciones estándar: Convierte a double, aplica math.h, re-escala a int
+ *   - Sets como arrays de strings: Permite operaciones UNION, INTERSECT sin
+ *     conversión a enteros (vs tabla de símbolos)
+ *   - Memoria: Cada ResultadoEval aloca sus propios arrays (liberar con
+ *     liberar_resultado())
+ *
+ * OPERADORES SOPORTADOS:
+ *   Aritmética: +, -, *, /
+ *   Comparación: =, <>, <, >, <=, >=
+ *   Lógica: AND, OR, NOT, IMPLICA
+ *   Conjuntos: UNION, INTERSECT, DIFFERENCE, SUBSET, IN, CARDINALITY
+ *   Funciones: abs, sqrt, sqr, sin, cos, ln, exp
+ *
+ * REFERENCIAS:
+ *   - bridge_types.h: Definición de Nodo (AST), VarReg, ResultadoEval
+ *   - expr_parser.c: Genera el AST que este módulo evalúa
+ *   - json_reader.c: Llama evaluar_expresion() en el pipeline
+ *
+ * ================================================================ */
+
 #define _POSIX_C_SOURCE 200809L
 #include <stdio.h>
 #include <stdlib.h>

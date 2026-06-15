@@ -1,8 +1,78 @@
 /* ================================================================
-   bridge_gecode.y
-   Parser Bison - Bridge Pascal/JSON -> GeCode Space
-   Modo dry-run: valida sintaxis, imprime AST, reporta errores
-   ================================================================ */
+ * bridge_gecode.y - Parser Bison para formato Pascal-like
+ * Proyecto: GNUBison - Bridge GeCode Validator
+ * ================================================================
+ *
+ * PROPÓSITO:
+ *   Parser principal del proyecto. Analiza archivos de especificación en
+ *   notación Pascal-like (alternativa textual a JSON) con secciones de
+ *   precision, variables, expresiones y funciones. Construye AST de
+ *   expresiones y valida tipos/dominios.
+ *
+ * ARQUITECTURA:
+ *   Bison parser + Flex lexer → AST + tablas globales
+ *
+ *   Pipeline:
+ *   1. Análisis léxico (bridge_gecode.l): Tokens
+ *   2. Análisis sintáctico (este archivo): Reglas gramaticales
+ *   3. Acciones semánticas: Registro en vars[], funcs[], construcción AST
+ *   4. Validación: validar_expr() verifica variables declaradas
+ *   5. Evaluación: Para formato Pascal-like solo imprime AST (no evalúa)
+ *
+ * FORMATO PASCAL-LIKE:
+ *   precision: 2;
+ *
+ *   variables: {
+ *     x : integer : [1..100] : 42;
+ *     estado : set : {A, B, C} : A;
+ *     activo : logic : {0,1} : true;
+ *   }
+ *
+ *   expresiones: {
+ *     x + 10;
+ *     estado IN {A, B};
+ *   }
+ *
+ *   funciones: {
+ *     distancia : [x, y] : float;
+ *   }
+ *
+ * DECISIONES DE DISEÑO:
+ *   - Modo dry-run: Solo valida sintaxis y construye AST, no ejecuta solver.
+ *     La evaluación real solo ocurre en modo JSON (json_reader.c).
+ *   - Gramática LL(1) compatible: Sin ambigüedades, precedencia declarativa.
+ *   - Registro incremental: Cada regla semántica actualiza vars[n_vars++]
+ *     directamente (no construcción de árbol intermedio).
+ *   - Dominios tipados:
+ *       integer/float: [min..max]
+ *       logic: {0,1} (implícito)
+ *       set: {str1, str2, ...}
+ *   - Valores con incertidumbre: [val1, val2, ...] en Pascal-like también
+ *     soportado (tiene_value=2).
+ *
+ * DIFERENCIAS CON JSON:
+ *   - JSON: Evaluación completa (json_reader.c → expr_eval.c)
+ *   - Pascal-like: Solo validación + AST printing (útil para debug)
+ *   - JSON: Formato machine-readable (APIs, pipelines)
+ *   - Pascal-like: Formato human-readable (edición manual, ejemplos)
+ *
+ * INTEGRACIÓN:
+ *   - Lexer: bridge_gecode.l define tokens (yylex)
+ *   - Main: Detecta formato (JSON vs Pascal) y llama yyparse() o parse_json_file()
+ *   - Salida: resumen() imprime estadísticas finales
+ *
+ * REFERENCIAS:
+ *   - GNU Bison 3.x: Parser generator (https://www.gnu.org/software/bison/)
+ *   - bridge_gecode.l: Lexer Flex asociado
+ *   - bridge_types.h: Definiciones de VarReg, FuncReg, Nodo
+ *   - json_reader.c: Parser alternativo para formato JSON
+ *
+ * RELACIÓN CON GNU BISON UPSTREAM:
+ *   Este proyecto usa GNU Bison como herramienta (parser generator), no es
+ *   un fork de Bison. El nombre "GNUBison" del directorio es histórico y
+ *   refleja el uso de Bison + GeCode para constraint programming.
+ *
+ * ================================================================ */
 
 %{
 #define _POSIX_C_SOURCE 200809L

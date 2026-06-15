@@ -1,3 +1,66 @@
+/* ================================================================
+ * json_output.c - Generador de salida JSON estructurada
+ * Proyecto: GNUBison - Bridge GeCode Validator
+ * ================================================================
+ *
+ * PROPÓSITO:
+ *   Serializa los resultados de evaluación a formato JSON estructurado
+ *   para consumo por herramientas externas (GeCode solver, dashboards,
+ *   APIs REST). Complementa el modo debug (salida texto) con formato
+ *   machine-readable.
+ *
+ * ARQUITECTURA:
+ *   Entrada: Variables globales (vars[], resultados_expresiones[])
+ *   Proceso: Construcción incremental de árbol cJSON
+ *   Salida: JSON formateado (stdout o archivo)
+ *
+ * ESTRUCTURA JSON SALIDA:
+ *   {
+ *     "archivo_entrada": "ejemplo.json",
+ *     "precision": 2,
+ *     "factor": 100,
+ *     "variables": [
+ *       {
+ *         "nombre": "x",
+ *         "tipo": "integer",
+ *         "dominio": [1, 100],
+ *         "valor": 42 | [10, 20, 30] | null
+ *       }
+ *     ],
+ *     "expresiones": [
+ *       {
+ *         "expresion": "x + y",
+ *         "resultado": 57 | [57, 67, 77]
+ *       }
+ *     ],
+ *     "resumen": {
+ *       "total_variables": 5,
+ *       "total_expresiones": 3,
+ *       "errores": 0,
+ *       "valido": true
+ *     }
+ *   }
+ *
+ * DECISIONES DE DISEÑO:
+ *   - Desescalado automático: Divide por factor_global para recuperar valores
+ *     reales (ej: valor_interno=4200, precision=2 → JSON: 42.00).
+ *   - Preservación de tipos: Booleanos → cJSON_Bool, sets → arrays de strings,
+ *     números → cJSON_Number con conversión a double.
+ *   - Arrays de incertidumbre: Múltiples valores se serializan como array JSON,
+ *     valor único como escalar (no array de 1 elemento).
+ *   - Modo dual salida: Si archivo_salida != NULL, escribe a archivo; sino stdout.
+ *
+ * INTEGRACIÓN:
+ *   - json_reader.c llama generar_salida_json() al finalizar procesamiento
+ *   - Control: flag global json_output_mode (0=texto, 1=JSON)
+ *
+ * REFERENCIAS:
+ *   - cJSON: Biblioteca de construcción de árboles JSON
+ *   - bridge_types.h: Definiciones de ResultadoExpr, VarReg
+ *   - json_reader.c: Consumidor (invoca generar_salida_json)
+ *
+ * ================================================================ */
+
 #define _POSIX_C_SOURCE 200809L
 #include <stdio.h>
 #include <stdlib.h>

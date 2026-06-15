@@ -1,3 +1,59 @@
+/* ================================================================
+ * expr_parser.c - Parser recursivo descendente de expresiones
+ * Proyecto: GNUBison - Bridge GeCode Validator
+ * ================================================================
+ *
+ * PROPÓSITO:
+ *   Parser de expresiones en notación infija para archivos JSON. Mientras
+ *   bridge_gecode.y parsea archivos Pascal-like completos, este módulo
+ *   parsea strings de expresiones individuales (campo "expresiones" del JSON).
+ *
+ * ARQUITECTURA:
+ *   Tokenizer → Parser recursivo → AST
+ *
+ *   1. Tokenizer: Escaneo léxico de la cadena de entrada (next_token)
+ *   2. Parser: Descendente recursivo con precedencia de operadores
+ *   3. AST: Construcción de nodos (nodo_binario, nodo_unario, etc.)
+ *
+ * GRAMÁTICA (precedencia de menor a mayor):
+ *   expresion     → expr_impl
+ *   expr_impl     → expr_or (IMPLICA expr_or)*
+ *   expr_or       → expr_and (OR expr_and)*
+ *   expr_and      → expr_not (AND expr_not)*
+ *   expr_not      → NOT expr_not | expr_comp
+ *   expr_comp     → expr_set_op ((=|<>|<|>|<=|>=) expr_set_op)?
+ *   expr_set_op   → expr_arit ((UNION|INTERSECT|...) expr_arit)*
+ *   expr_arit     → expr_term ((+|-) expr_term)*
+ *   expr_term     → expr_factor ((*|/) expr_factor)*
+ *   expr_factor   → func_std | set_literal | IDENT | NUM | (expresion)
+ *
+ * DECISIONES DE DISEÑO:
+ *   - Tokenizer integrado: Evita dependencia de Flex para expresiones simples.
+ *   - Conversión de floats: Los números decimales se multiplican por
+ *     factor_global durante tokenización (ej: 3.14 → 314 con precision=2).
+ *   - Soporte mixto: Maneja expresiones numéricas, lógicas, de conjuntos
+ *     y combinaciones (ej: "x > 5 AND estado IN {A,B}").
+ *   - Palabras clave case-sensitive: AND/OR/NOT en mayúsculas, pero 'in'
+ *     acepta minúsculas para compatibilidad.
+ *   - Set literals: Sintaxis {a,b,c} sin comillas (parsing especial en
+ *     parse_set_literal).
+ *
+ * DIFERENCIAS CON bridge_gecode.y:
+ *   - Bison parser: Archivos completos (precision, variables, expresiones)
+ *   - Este parser: Solo expresiones individuales (delegado por json_reader.c)
+ *   - Bison: Acciones semánticas integradas (registro de variables)
+ *   - Este: Solo construcción de AST (validación posterior)
+ *
+ * INTEGRACIÓN:
+ *   json_reader.c llama parse_expression(expr_str) para cada expresión JSON.
+ *
+ * REFERENCIAS:
+ *   - bridge_types.h: Definiciones de Nodo, TipoNodo, funciones de AST
+ *   - bridge_gecode.y: Parser Bison para formato Pascal-like
+ *   - json_reader.c: Consumidor principal
+ *
+ * ================================================================ */
+
 #define _POSIX_C_SOURCE 200809L
 #include <stdio.h>
 #include <stdlib.h>

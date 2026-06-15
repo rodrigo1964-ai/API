@@ -1,8 +1,74 @@
 /* ================================================================
-   bridge_gecode.l
-   Lexer Flex - Bridge Pascal/JSON -> GeCode Space
-   Convierte floats a enteros via factor_global (redondeo)
-   ================================================================ */
+ * bridge_gecode.l - Lexer Flex para formato Pascal-like
+ * Proyecto: GNUBison - Bridge GeCode Validator
+ * ================================================================
+ *
+ * PROPÓSITO:
+ *   Análisis léxico (tokenización) de archivos en formato Pascal-like.
+ *   Trabaja en conjunto con bridge_gecode.y (parser Bison) para
+ *   implementar el pipeline de parsing completo.
+ *
+ * ARQUITECTURA:
+ *   Entrada (texto) → Flex scanner (este archivo) → Tokens →
+ *   Bison parser (bridge_gecode.y) → AST + tablas globales
+ *
+ * CARACTERÍSTICAS PRINCIPALES:
+ *
+ * 1. CONVERSIÓN FLOAT → INT:
+ *    Los números decimales se multiplican por factor_global y se redondean.
+ *    Ejemplo: con precision=2 (factor_global=100):
+ *      - Input: "3.14"
+ *      - Proceso: atof("3.14") * 100 = 314.0 → round() → 314
+ *      - Token: NUMERO con yylval.entero=314
+ *
+ * 2. LOOKAHEAD PARA FUNCIONES:
+ *    Patrón "abs"/[ \t]*"(" distingue función abs() de variable abs.
+ *    Sin lookahead, "abs" siempre sería IDENTIFICADOR.
+ *
+ * 3. PALABRAS CLAVE CASE-SENSITIVE:
+ *    AND/OR/NOT en mayúsculas (Pascal-like estricto).
+ *    Operadores de conjuntos: UNION, INTERSECT, DIFFERENCE, etc.
+ *
+ * 4. STRINGS CON COMILLAS:
+ *    "estado" → yylval.str = "estado" (sin comillas)
+ *    Usado para elementos de conjuntos en formato Pascal.
+ *
+ * 5. COMENTARIOS:
+ *    - Pascal: (* comentario *)
+ *    - C++: // comentario
+ *
+ * TOKENS GENERADOS:
+ *   - Estructura: PRECISION, VARIABLES, EXPRESIONES, FUNCIONES
+ *   - Tipos: TIPO_INTEGER, TIPO_FLOAT, TIPO_LOGIC, TIPO_SET
+ *   - Operadores: +, -, *, /, =, <>, <, >, <=, >=
+ *   - Lógicos: AND, OR, NOT, IMPLICA
+ *   - Conjuntos: IN, UNION, INTERSECT, DIFFERENCE, SUBSET, CARDINALITY
+ *   - Funciones: FN_ABS, FN_SQRT, FN_SQR, FN_SIN, FN_COS, FN_LN, FN_EXP
+ *   - Literales: NUMERO, IDENTIFICADOR, STRING_LIT, BOOL_TRUE, BOOL_FALSE
+ *   - Delimitadores: {, }, [, ], (, ), ,, :, ;
+ *
+ * DECISIONES DE DISEÑO:
+ *   - Conversión temprana float→int: Evita aritmética flotante en parser.
+ *   - Lookahead para funciones: Reduce ambigüedad sin cambiar gramática.
+ *   - strdup() para strings: Parser/evaluador asume ownership (debe free()).
+ *   - yylineno habilitado: Reporta número de línea en errores.
+ *   - noyywrap: No soporta múltiples archivos (un archivo por invocación).
+ *
+ * INTEGRACIÓN:
+ *   - Genera tokens para bridge_gecode.y (parser Bison)
+ *   - Usa bridge_gecode.tab.h (definiciones de tokens generadas por Bison)
+ *   - Accede a factor_global (definido en bridge_gecode.y)
+ *
+ * DIFERENCIAS CON expr_parser.c:
+ *   - Este lexer: Archivos completos Pascal-like (precision, variables, etc.)
+ *   - expr_parser.c: Solo expresiones individuales (para JSON)
+ *
+ * REFERENCIAS:
+ *   - GNU Flex: https://github.com/westes/flex
+ *   - bridge_gecode.y: Parser Bison asociado
+ *   - bridge_gecode.tab.h: Definiciones de tokens (generado por Bison)
+ *
+ * ================================================================ */
 
 %{
 #define _POSIX_C_SOURCE 200809L

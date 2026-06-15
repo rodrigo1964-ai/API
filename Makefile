@@ -1,5 +1,47 @@
-# Makefile para Bridge GeCode Validator
-# Estructura organizada: /src /obj /bin /docs /tests
+# ================================================================
+# Makefile - Sistema de construcción de GNUBison
+# Proyecto: GNUBison - Bridge GeCode Validator
+# ================================================================
+#
+# PROPÓSITO:
+#   Sistema de construcción modular para el proyecto. Genera parser/lexer
+#   con Bison/Flex, compila módulos C, y enlaza el ejecutable final.
+#
+# ESTRUCTURA DEL PROYECTO:
+#   src/     - Código fuente (.y, .l, .c, .h)
+#   obj/     - Archivos objeto (.o) y código generado (.tab.c, lex.yy.c)
+#   bin/     - Ejecutable final (bridge)
+#   docs/    - Documentación
+#   tests/   - Casos de prueba
+#
+# PIPELINE DE CONSTRUCCIÓN:
+#   1. Bison: bridge_gecode.y → bridge_gecode.tab.c + bridge_gecode.tab.h
+#   2. Flex: bridge_gecode.l → lex.yy.c (requiere bridge_gecode.tab.h)
+#   3. Compilación: Módulos C (.c → .o)
+#   4. Enlazado: .o + .tab.c + lex.yy.c → bin/bridge
+#
+# TARGETS PRINCIPALES:
+#   make           - Construye bin/bridge
+#   make clean     - Elimina objetos y archivos generados
+#   make test      - Ejecuta prueba básica
+#   make test-all  - Ejecuta todas las pruebas (via probar_todos.sh)
+#   make info      - Muestra estructura del proyecto
+#   make install   - Instala a /usr/local/bin/bridge
+#
+# DECISIONES DE DISEÑO:
+#   - Separación de directorios: Evita mezclar fuente/binarios/generados
+#   - Dependencias explícitas: Cada .o lista sus .h para rebuild incremental
+#   - Bison primero, Flex después: lex.yy.c necesita bridge_gecode.tab.h
+#   - CFLAGS con -lm: Enlaza libmath para funciones trigonométricas
+#   - CFLAGS con -I$(SRC_DIR): Permite #include "header.h" sin path relativo
+#
+# DEPENDENCIAS EXTERNAS:
+#   - gcc (compilador C)
+#   - GNU Bison 3.x (parser generator)
+#   - Flex 2.x (lexer generator)
+#   - make (GNU Make)
+#
+# ================================================================
 
 CC = gcc
 CFLAGS = -Wall -std=c11 -g -lm -I$(SRC_DIR)

@@ -1,3 +1,71 @@
+/* ================================================================
+ * bridge_types.h - Tipos y estructuras compartidas del proyecto
+ * Proyecto: GNUBison - Bridge GeCode Validator
+ * ================================================================
+ *
+ * PROPÓSITO:
+ *   Definiciones centralizadas de tipos, estructuras de datos y constantes
+ *   globales para todo el proyecto. Header compartido por parser Bison,
+ *   lexer Flex, evaluador, y módulos JSON.
+ *
+ * COMPONENTES PRINCIPALES:
+ *
+ * 1. PRECISION Y ESCALADO:
+ *    - precision_decimales: Número de decimales para floats (ej: 2)
+ *    - factor_global: Factor de escala (10^precision, ej: 100)
+ *    - Todos los floats se almacenan como int * factor_global
+ *
+ * 2. TIPOS DE VARIABLES (TipoVar):
+ *    - T_INTEGER: Enteros (dom_min..dom_max)
+ *    - T_FLOAT: Flotantes escalados (dom_min..dom_max en int)
+ *    - T_LOGIC: Booleanos (dominio implícito {0,1})
+ *    - T_SET: Conjuntos (dominio = lista de strings)
+ *
+ * 3. NODOS AST (TipoNodo):
+ *    - Literales: NODO_ENTERO, NODO_BOOL, NODO_SET_LIT
+ *    - Operadores aritméticos: SUMA, RESTA, MULT, DIV
+ *    - Operadores comparación: EQ, NEQ, LT, GT, LEQ, GEQ
+ *    - Operadores lógicos: AND, OR, NOT, IMPLICA
+ *    - Funciones estándar: ABS, SQRT, SQR, SIN, COS, LN, EXP
+ *    - Operadores de conjuntos: UNION, INTERSECT, DIFFERENCE, SUBSET,
+ *      CARDINALITY, IN
+ *
+ * 4. ESTRUCTURAS:
+ *    - Nodo: AST de expresiones (árbol binario + casos especiales)
+ *    - VarReg: Registro de variable (nombre, tipo, dominio, valor)
+ *    - FuncReg: Registro de función (nombre, parámetros, salida)
+ *
+ * 5. TABLAS GLOBALES:
+ *    - vars[MAX_VARS]: Variables declaradas (256 max)
+ *    - funcs[MAX_FUNCS]: Funciones definidas (64 max)
+ *    - set_tabla[MAX_SET_ENTRIES]: Interning de strings de conjuntos (512 max)
+ *
+ * DECISIONES DE DISEÑO:
+ *   - Arrays estáticos: Evita malloc/free en hot path (límites conocidos)
+ *   - Interning de sets: set_tabla[] mapea strings → índices para comparación
+ *     rápida (reg_set() retorna índice, comparación por ==)
+ *   - Incertidumbre en VarReg:
+ *       tiene_value=0 → sin valor (usar dominio completo)
+ *       tiene_value=1 → valor fijo (val_escalar)
+ *       tiene_value=2 → múltiples valores (val_vals[], val_n)
+ *   - AST heterogéneo: struct Nodo tiene campos para todos los casos (izq/der
+ *     para binarios, args[] para funciones, set_elementos[] para literales de
+ *     conjuntos). Trade-off: memoria vs simplicidad.
+ *
+ * LÍMITES:
+ *   MAX_VARS = 256        // Variables por archivo
+ *   MAX_FUNCS = 64        // Funciones definidas
+ *   MAX_SET_ENTRIES = 512 // Strings de conjuntos únicos
+ *   MAX_LIST = 64         // Elementos en listas temporales
+ *   MAX_EXPRS = 256       // Expresiones por archivo
+ *
+ * REFERENCIAS:
+ *   - bridge_gecode.y: Implementa variables globales (vars[], funcs[], etc.)
+ *   - expr_eval.c: Consume Nodo (evaluar_expresion)
+ *   - json_reader.c: Construye VarReg desde JSON
+ *
+ * ================================================================ */
+
 #ifndef BRIDGE_TYPES_H
 #define BRIDGE_TYPES_H
 
